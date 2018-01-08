@@ -1,3 +1,3 @@
 import $ from "jquery";
 
-$('#c').text("Chill")
+$('#c').text("Chill in ground")

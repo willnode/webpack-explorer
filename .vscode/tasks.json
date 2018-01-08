@@ -7,6 +7,12 @@
             "label": "run server",
             "type": "shell",
             "command": "yarn run run",
+            "group": "test"
+        },
+        {
+            "label": "bundle js",
+            "type": "shell",
+            "command": "yarn run bundle",
             "group": {
                 "kind": "build",
                 "isDefault": true
