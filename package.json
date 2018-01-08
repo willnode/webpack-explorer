@@ -1,0 +1,19 @@
+{
+  "name": "webpack-explorer",
+  "version": "1.0.0",
+  "description": "Generate webpack config easily!",
+  "main": "js/main.js",
+  "author": "willnode",
+  "license": "MIT",
+  "scripts": {
+    "run": "http-server -c-1",
+    "bundle": "webpack"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.2.17",
+    "path": "^0.12.7"
+  }
+}
