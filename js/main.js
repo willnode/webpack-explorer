@@ -1,3 +1,7 @@
-import $ from "jquery";
+import $ from 'jquery';
+import Data from './data';
+import Template from './template';
 
-$('#c').text("Chill in ground")
+var data = new Data();
+
+$('#output').text(Template(data));
