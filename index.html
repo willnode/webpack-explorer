@@ -2,26 +2,40 @@
 
 <head>
     <title>Webpack Explorer</title>
+    <link href='style.css' rel="stylesheet">
 </head>
 
 <body>
     <div id='app'>
-        <div id='entry'>
-            <span>Entry</span>
-            <input v-for='(e, i) in entry' v-model='entry[i]'></input>
-            <button v-on:click='entry.push("")' tabindex="-1">+</button>
-            <button v-on:click='entry.pop()' tabindex="-1">-</button>
+        <div class="left">
+            <div class="group" id='entry'>
+                <h2>Entry</h2>
+                <input v-for='(e, i) in entry' v-model='entry[i]' placeholder="Add an entry"></input>
+                <button class="opt" v-on:click='entry.push("")' tabindex="-1">+</button>
+                <button class="opt" v-on:click='entry.pop()' tabindex="-1">-</button>
+            </div>
+            <div class="group" id='output'>
+                <h2>Output</h2>
+                <input v-model='output.filename' placeholder="file sname"></input>
+                <input v-bind:class='{ opt: !output.path }' v-model='output.path' placeholder="path"></input>
+                <input v-bind:class='{ opt: !output.publicpath }' v-model='output.publicpath' placeholder="public path"></input>
+                <input v-bind:class='{ opt: !output.library }' v-model='output.library' placeholder="library"></input>
+            </div>
+            <div class="group" id='loader'>
+                <h2>Loader</h2>
+                <select v-model='registry.selected'>
+                    <option v-for='l in registry.loaders' v-bind:value='l'>{{ l.desc }}</option>
+                </select>
+                <select v-if='registry.selected' v-model='registry.active'>
+                    <option v-for='l in registry.selected.schemes' v-bind:value='l'>{{ l.desc }}</option>
+                </select>
+                <button v-if='registry.active' v-on:click='loaders.push(registry.active)'>+</button>
+            </div>
         </div>
-        <div id='output'>
-            <span>Output</span>
-            <input v-model='output.filename' placeholder="file sname"></input>
-            <input v-model='output.path' placeholder="path"></input>
-            <input v-model='output.publicpath' placeholder="public path"></input>
-            <input v-model='output.library' placeholder="library"></input>
+        <div class="right">
+            <h2>webpack.config.js</h2>
+            <pre id='generated' v-html='render()' class="hljs"></pre>
         </div>
-        <pre id='generated'>{{ render() }}</pre>
-    </div>
-    <div>
     </div>
     <script src="bundle.js"></script>
 </body>

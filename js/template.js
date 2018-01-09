@@ -1,6 +1,6 @@
 import Data from './data'
 
-var jsontojs = /[\"\'](\w)[\"\']\:/
+var jsontojs = /[\"\'](\w+)[\"\']\:/g
 
 export default function (data = new Data()) {
 
@@ -11,12 +11,8 @@ export default function (data = new Data()) {
     function parseloaderuse(use) {
         if (typeof use === 'string')
             return use;
-        else if (Array.isArray(use))
-            return `[ ${use.map((v) => parseloaderuse(v)).join(', ')} ]`
-        else if (typeof use === 'object')
-            return JSON.stringify(use).replace(jsontojs, `$1:`);
         else
-            return '';
+            return JSON.stringify(use).replace(jsontojs, `$1:`);
     }
 
     function parsestring(str) {
@@ -25,7 +21,7 @@ export default function (data = new Data()) {
         else if (typeof str === 'string')
             return `'${str}'`;
         else if (Array.isArray(str))
-            return `[ ${str.map((s) => parsestring(s)).join(', ')} ]`
+            return `[ ${str.map((s) => parsestring(s)).filter(Boolean).join(', ')} ]`
         else {
             var s = [];
             for (var prop in str) {
@@ -44,7 +40,7 @@ export default function (data = new Data()) {
         [
             parseparam('entry', data.entry.length === 1 ? data.entry[0] : data.entry),
             parseparam('output', data.output),
-            (data.modules ? `modules: ${parseparam('rules', data.loaders.map((v) => parseloader(parseloader(v))))} ` : '')
+            (data.loaders ? `modules: { rules: [ ${data.loaders.map((v) => parseloader(v)).join(', ')} ] } ` : '')
         ].filter(Boolean).join(', ')
         + '}';
 }

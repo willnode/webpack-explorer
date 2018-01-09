@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     desc: 'Load .css file',
     schemes: [
         {

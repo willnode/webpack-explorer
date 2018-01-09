@@ -13,7 +13,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
-  //devtool: "cheap-module-eval-source-map",
+  devtool: "cheap-module-eval-source-map",
   watch: true,
   watchOptions: {
     poll: 1000,
