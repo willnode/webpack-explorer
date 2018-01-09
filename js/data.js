@@ -1,7 +1,7 @@
 
 export default function () {
-    this.loaders = [], // modules as filename located in our /modules/
-    this.plugins = [], // plugins as filename located in our /plugins/
+    this.loaders = [], // modules as scheme located in our /modules/
+    this.plugins = [], // plugins as scheme located in our /plugins/
     this.options = [], // advanced options as filename located in our /options/
     this.entry = ['main.js'], // entries
     this.output = {

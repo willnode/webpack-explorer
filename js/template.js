@@ -25,7 +25,7 @@ export default function (data = new Data()) {
         else if (typeof str === 'string')
             return `'${str}'`;
         else if (Array.isArray(str))
-            return `[ ${str.join(', ')} ]`
+            return `[ ${str.map((s) => parsestring(s)).join(', ')} ]`
         else {
             var s = [];
             for (var prop in str) {
@@ -42,7 +42,7 @@ export default function (data = new Data()) {
 
     return 'module.exports = {' +
         [
-            parseparam('entry', data.entry),
+            parseparam('entry', data.entry.length === 1 ? data.entry[0] : data.entry),
             parseparam('output', data.output),
             (data.modules ? `modules: ${parseparam('rules', data.loaders.map((v) => parseloader(parseloader(v))))} ` : '')
         ].filter(Boolean).join(', ')

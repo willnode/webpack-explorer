@@ -4,10 +4,24 @@
     <title>Webpack Explorer</title>
 </head>
 
-<body id='app'>
+<body>
+    <div id='app'>
+        <div id='entry'>
+            <span>Entry</span>
+            <input v-for='(e, i) in entry' v-model='entry[i]'></input>
+            <button v-on:click='entry.push("")' tabindex="-1">+</button>
+            <button v-on:click='entry.pop()' tabindex="-1">-</button>
+        </div>
+        <div id='output'>
+            <span>Output</span>
+            <input v-model='output.filename' placeholder="file sname"></input>
+            <input v-model='output.path' placeholder="path"></input>
+            <input v-model='output.publicpath' placeholder="public path"></input>
+            <input v-model='output.library' placeholder="library"></input>
+        </div>
+        <pre id='generated'>{{ render() }}</pre>
+    </div>
     <div>
-        <span>Config:</span>
-        <pre id='output'></pre>
     </div>
     <script src="bundle.js"></script>
 </body>

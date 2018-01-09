@@ -6,8 +6,14 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    //new UglifyJsPlugin()
+    new UglifyJsPlugin()
   ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
+  //devtool: "cheap-module-eval-source-map",
   watch: true,
   watchOptions: {
     poll: 1000,
