@@ -20,6 +20,17 @@ data.render = function () {
     return hljs.highlightAuto(bs).value;// bs ? hljs.highlight('javascript', bs, true) : bs; //}, { output: { beautify: true } }).code;
 }
 
+data.depedencies = function () {
+    var dev = ['webpack'];
+
+    for (var l of data.loaders)
+        if (l.depends)
+            for (var ll of l.depends)
+                dev.push(ll)
+
+    return dev.filter((v, i, ary) => ary.findIndex(c => c === v) === i).join(' ')
+}
+
 var app = new Vue({
     el: '#app',
     data: data

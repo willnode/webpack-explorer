@@ -20,6 +20,8 @@ export default function (data = new Data()) {
             return ''
         else if (typeof str === 'string')
             return `'${str}'`;
+        else if (typeof str === 'RegExp')
+            return `${str.toString()}`
         else if (Array.isArray(str))
             return `[ ${str.map((s) => parsestring(s)).filter(Boolean).join(', ')} ]`
         else {
