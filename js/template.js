@@ -11,7 +11,6 @@ export default function (data = new Data()) {
                 parseparam('test', scheme.test),
                 parseparam('exclude', scheme.exclude),
                 parseparam('include', scheme.include),
-                parseparam('resources', scheme.resources),
             ].filter(Boolean).join(', ')
         }, use: ${parseloaderuse(scheme.use)}}`
     }

@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import App from '../app.vue';
 
-new Vue({
+var vue = new Vue({
     el: '#app',
     render: h => h(App)
 })
 
-//hljs.initHighlightingOnLoad();
-//$('#output').text(Template(data));
+window.vue = vue.$children[0];
+window.update = vue.$children[0].loader_choose;

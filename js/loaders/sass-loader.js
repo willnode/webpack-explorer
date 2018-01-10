@@ -1,13 +1,21 @@
 module.exports = {
-    desc: 'Load .scss file',
+    desc: '.scss',
+    options: {
+        sourceMap: false,
+    },
     schemes: [
         {
-            desc: 'by default',
+            if: 'sourceMap',
+            is: false,
+            detail: 'Load .scss file as ?',
             depends: ['sass-loader', 'css-loader', 'style-loader'],
+
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader']
         }, {
-            desc: 'with source maps',
+            if: 'sourceMap',
+            is: true,
+            detail: 'Load .scss file as ?. With source map',
             depends: ['sass-loader', 'css-loader', 'style-loader'],
             test: /\.scss$/,
             use: [{

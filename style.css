@@ -10,6 +10,14 @@ body {
     align-content: center;
 }
 
+.hero-desc {
+    font-style: italic;
+}
+
+.hero-2 {
+    font-weight: normal;
+}
+
 .right {
     display: inline-block;
     width: 50%;
@@ -27,19 +35,41 @@ body {
 }
 
 
-.group .wide {
+.group .wide, .setup-wide > div {
     display: flex;
     margin: 5px 0;
     width: 100%;
 }
 
-.wide > input, .wide > select, .wide > span, input.wide {
+.wide > input, .wide > select, select.wide, input.wide, button.wide, .wide > span, .setup-wide > div > * {
     flex-grow: 1;
     padding: 5px 20px;
 }
 
+.setup-wide > div > span {
+    flex-grow: 0;
+    width: 100px;
+}
+
+.setup-wide > div {
+    font-size: 14px;
+    margin: 0px;
+}
+
 .rem {
     margin-left: 5px;
+}
+
+#loader-add {
+    background-color: #8df;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.npm-link > a{
+    color: #9CDCFE;
+    white-space: nowrap;
+    text-decoration-line: none;
 }
 
 .group .opt {
@@ -53,7 +83,7 @@ body {
 
 .group:hover > .opt,
 .group:focus > .opt {
-    max-height: 100px;
+    max-height: 400px;
     margin: 5px 0;
     padding: 5px 20px;
     opacity: 1;
@@ -65,7 +95,7 @@ h2 {
     margin: 15px 0px 0px 0px;
     font-weight: bold;
     display: block;
-    font-size: 20px;jnm
+    font-size: 20px;
 }
 
 pre {
