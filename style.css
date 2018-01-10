@@ -23,18 +23,26 @@ body {
 
 .half {
     display: inline-block;
-    width: 50%;
+    width: calc(50% - 10px);
 }
 
 
-.group > * {
-    width: 100%;
+.group .wide {
+    display: flex;
     margin: 5px 0;
-    padding: 5px 20px;
-    display: block
+    width: 100%;
 }
 
-.group > .opt {
+.wide > input, .wide > select, .wide > span, input.wide {
+    flex-grow: 1;
+    padding: 5px 20px;
+}
+
+.rem {
+    margin-left: 5px;
+}
+
+.group .opt {
     max-height: 0px;
     opacity: 0;
     margin: 0;
@@ -64,9 +72,21 @@ pre {
     font-kerning: 2em;
 }
 
-.rem {
-    float: right;
+.wrap {
+    white-space: pre-wrap;
+    padding-left: 3em  !important;
+    text-indent: -2em;
 }
+
+.info {
+    font-size: 13px;
+    font-style: italic;
+    background-color: #ddd;
+    color: #222;
+    padding: 5px;
+    border-radius: 0px 5px 5px 5px;
+}
+
 
 /*
  * Auto highlight

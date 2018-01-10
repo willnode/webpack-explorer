@@ -1,18 +1,21 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ProgressBar = require('progress-bar-webpack-plugin');
 
 module.exports = {
   entry: './js/main.js',
   output: {
     filename: 'bundle.js'
   },
-  plugins: [
-    new UglifyJsPlugin()
-  ],
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
+  module: {
+    rules: [{
+      test: /\.vue$/,
+      use: ['vue-loader']
+    }]
   },
+  plugins: [
+    new UglifyJsPlugin(),
+    new ProgressBar()
+  ],
   devtool: "cheap-module-eval-source-map",
   watch: true,
   watchOptions: {
