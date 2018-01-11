@@ -1,7 +1,7 @@
 module.exports = {
     name: '.vue\t(vue-loader)',
     options: {
-        useStyle: ['none', 'css', 'sass'],
+        useStyle: ['css', 'sass', 'none'],
     },
     schemes: [
         {
@@ -24,7 +24,7 @@ module.exports = {
             if: 'useStyle',
             is: 'sass',
             detail: 'Load and parse .vue template during bundle. Use SASS in styles using <style lang="scss">',
-            depends: ['vue-loader', 'vue-template-compiler', 'sass-loader', 'css-loader', 'vue-style-loader'],
+            depends: ['vue-loader', 'vue-template-compiler', 'sass-loader', 'node-sass', 'css-loader', 'vue-style-loader'],
 
             test: /\.vue$/,
             use: [{

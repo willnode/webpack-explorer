@@ -9,11 +9,17 @@ module.exports = {
   module: {
     rules: [{
       test: /\.vue$/,
-      use: ['vue-loader']
+      use: [{
+        loader: 'vue-loader', options: {
+          loaders: {
+            scss: ['vue-style-loader', 'css-loader', 'sass-loader']
+          }
+        }
+      }]
     }]
   },
   plugins: [
-    new UglifyJsPlugin(),
+    //new UglifyJsPlugin({ parallel: true }),
     new ProgressBar()
   ],
   devtool: "cheap-module-eval-source-map",

@@ -13,7 +13,7 @@ var data = {
     loaders: [], // modules as scheme located in our /modules/
     plugins: [], // plugins as scheme located in our /plugins/
     options: [], // advanced options as filename located in our /options/
-    entry: ['main.js'], // entries
+    entry: [{ key: '', value: 'main.js' }], // entries (key, value)
     output: {
         path: '', // out directory
         filename: 'bundle.js', // out bundle
@@ -47,18 +47,20 @@ var data = {
         return html;
     },
     loader_choose: () => {
+        var apply = (scheme) => { if (data.registry.active !== scheme) data.registry.active = scheme; }
         var sel = data.registry.selected;
         for (var scheme of sel.schemes) {
-            if (typeof scheme.if === 'string') {
+            if (!scheme.if) {
+                apply(scheme);
+                break;
+            } else if (typeof scheme.if === 'string') {
                 if (window['___' + scheme.if] === scheme.is) {
-                    if (data.registry.active !== scheme)
-                        data.registry.active = scheme;
+                    apply(scheme);
                     break;
                 }
             } else if (Array.isArray(scheme.if)) {
                 if (scheme.if.every((v, i) => window['___' + v] === scheme.is[i])) {
-                    if (data.registry.active !== scheme)
-                        data.registry.active = scheme;
+                    apply(scheme);
                     break;
                 }
             }
@@ -87,18 +89,20 @@ var data = {
         return html;
     },
     plugin_choose: () => {
+        var apply = (scheme) => { if (data.registry.candidate !== scheme) data.registry.candidate = scheme; }
         var sel = data.registry.picked;
         for (var scheme of sel.schemes) {
-            if (typeof scheme.if === 'string') {
+            if (!scheme.if) {
+                apply(scheme);
+                break;
+            } else if (typeof scheme.if === 'string') {
                 if (window['___' + scheme.if] === scheme.is) {
-                    if (data.registry.candidate !== scheme)
-                        data.registry.candidate = scheme;
+                    apply(scheme);
                     break;
                 }
             } else if (Array.isArray(scheme.if)) {
                 if (scheme.if.every((v, i) => window['___' + v] === scheme.is[i])) {
-                    if (data.registry.candidate !== scheme)
-                        data.registry.candidate = scheme;
+                    apply(scheme);
                     break;
                 }
             }

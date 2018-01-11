@@ -10,16 +10,18 @@
     "bundle": "webpack"
   },
   "dependencies": {
-    "@types/babel-core": "^6.25.3",
     "vue": "^2.5.13"
   },
   "devDependencies": {
+    "css-loader": "^0.28.8",
     "highlight.js": "^9.12.0",
     "js-beautify": "^1.7.5",
-    "path": "^0.12.7",
+    "node-sass": "^4.7.2",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "sass-loader": "^6.0.6",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "vue-loader": "^13.7.0",
+    "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0"
   }

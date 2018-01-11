@@ -20,8 +20,8 @@ export default function (data = new Data()) {
         if (scheme.head)
             head.push(scheme.head);
         return [
-                parsestring(scheme.plugin),
-            ].filter(Boolean).join(', ')
+            parsestring(scheme.plugin),
+        ].filter(Boolean).join(', ')
 
     }
 
@@ -64,14 +64,14 @@ export default function (data = new Data()) {
             return path.map((v) => resolvepath(head, v, absolute));
         } else if (typeof path === 'object') {
             path = Object.assign({}, path);
-            for(var i in path)
+            for (var i in path)
                 path[i] = resolvepath(head, path[i], absolute);
             return path;
         }
 
         if (path.includes('/')) {
             if (absolute) {
-                head.push(`var path = require('path')`)
+                head.push(`const path = require('path')`)
                 return `FUNC: path.resolve(__dirname, '${path}')`;
             } else {
                 if (path.length > 1) {
@@ -85,11 +85,24 @@ export default function (data = new Data()) {
             return path;
     }
 
+    function parseentry(head, entry = []) {
+        if (entry.length === 0) return '{}';
+        var usekeys = entry.every((v) => v.key);
+        if (usekeys) {
+            return `{${entry.map((v) => parseparam(v.key, resolvepath(head, v.value, false))).filter(Boolean).join(',')}}`;
+        } else {
+            if (entry.length === 1)
+                return entry[0].value;
+            else
+                return `[${entry.map((v) => parsestring(resolvepath(head, v.value, false))).filter(Boolean).join(',')}]`
+        }
+    }
+
     var head = [];
 
     var ret = 'module.exports = {' +
         [
-            parseparam('entry', resolvepath(head, data.entry.length === 1 ? data.entry[0] : data.entry, false)),
+            'entry: ' + parseentry(head, data.entry),
             parseparam('output', {
                 // rack up path individually
                 filename: data.output.filename,

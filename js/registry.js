@@ -10,7 +10,8 @@ export default {
         require('./loaders/file-loader'),
     ],
     plugins: [
-        require('./plugins/uglifyjs-webpack-plugin')
+        require('./plugins/uglifyjs-webpack-plugin'),
+        require('./plugins/progress-bar-webpack-plugin')
     ],
 
     // dummy variables used during runtime

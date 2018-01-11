@@ -48,7 +48,7 @@ module.exports = {
                             use: {
                                 loader: 'babel-loader',
                                 options: {
-                                    preset: [i === i_off ? '' : (i === 0 ? 'env' : ['env', { browser: opts.env[i] }]),
+                                    preset: [i === i_off ? '' : (i === 0 ? 'env' : ['env', { targets: { browsers: opts.env[i] } }]),
                                     b && 'react', c && 'flow', d && 'minify'].filter(Boolean)
                                 }
                             }

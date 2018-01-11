@@ -1,25 +1,38 @@
 <template>
     <div>
         <div class="left">
-            <h1 class="hero">Webpack Explorer</h1>
-            <span class="hero-name" title="And don't waste time dangling with docs!">Webpack config template and generator</span>
-            <div class="group" id='entry'>
+            <input type="radio" class='hide' name='hide' id='show-all' checked>
+            <label for='show-all'><h1 class="hero">Webpack Explorer</h1></label>
+            <span class="hero-name" title="So you don't have to waste time dangling with docs!">Webpack config template and generator</span>
+            <label for='entry-hide'>
                 <h2>Entry</h2>
+            </label>
+            <input type="radio" class='hide' name='hide' id='entry-hide'>
+            <div class="group" id='entry'>
                 <div class="wide" v-for='(e, i) in entry'>
-                    <input v-model='entry[i]' placeholder="Add an entry"></input>
+                    <input v-model='entry[i].key' placeholder="Chunkname"></input>
+                    <input v-model='entry[i].value' placeholder="Entry path"></input>
                     <button class="rem" v-on:click='entry.splice(i, 1)' tabindex="-1">-</button>
                 </div>
-                <button class="opt" v-on:click='entry.push("")' tabindex="-1">+</button>
+                <button class="opt" v-on:click='entry.push({key: "", value: ""})' tabindex="-1">+</button>
             </div>
-            <div class="group" id='output'>
+            <!---->
+            <label for='output-hide'>
                 <h2>Output</h2>
+            </label>
+            <input type="radio" class='hide' name='hide' id='output-hide'>
+            <div class="group" id='output'>
                 <input class="wide" v-model='output.filename' placeholder="file name"></input>
                 <input class="wide" :class='{ opt: !output.path }' v-model='output.path' placeholder="path"></input>
                 <input class="wide" :class='{ opt: !output.publicPath }' v-model='output.publicPath' placeholder="public path"></input>
                 <input class="wide" :class='{ opt: !output.library }' v-model='output.library' placeholder="library"></input>
             </div>
-            <div class="group" id='loader'>
+            <!---->
+            <label for='loader-hide'>
                 <h2>Loader</h2>
+            </label>
+            <input type="radio" class='hide' name='hide' id='loader-hide'>
+            <div class="group" id='loader'>
                 <div id='loader-add' class="opt">
                     <div class="wide">
                         <select v-model='registry.selected'>
@@ -37,8 +50,12 @@
                     <button v-on:click='loaders.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
-            <div class="group" id='plugin'>
+            <!---->
+            <label for='plugin-hide'>
                 <h2>Plugin</h2>
+            </label>
+            <input type="radio" class='hide' name='hide' id='plugin-hide'>
+            <div class="group" id='plugin'>
                 <div id='plugin-add' class="opt">
                     <div class="wide">
                         <select v-model='registry.picked'>
@@ -77,3 +94,8 @@
         }
     }
 </script>
+
+<style lang="scss">
+    @import 'style';
+    @import 'highlighting';
+</style>

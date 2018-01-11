@@ -8,7 +8,7 @@ module.exports = {
             if: 'sourceMap',
             is: false,
             detail: 'Load .scss file as ?',
-            depends: ['sass-loader', 'css-loader', 'style-loader'],
+            depends: ['sass-loader', 'css-loader', 'style-loader', 'node-sass'],
 
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader']
@@ -16,7 +16,7 @@ module.exports = {
             if: 'sourceMap',
             is: true,
             detail: 'Load .scss file as ?. With source map',
-            depends: ['sass-loader', 'css-loader', 'style-loader'],
+            depends: ['sass-loader', 'css-loader', 'style-loader', 'node-sass'],
             test: /\.scss$/,
             use: [{
                 loader: "style-loader"

@@ -23,7 +23,7 @@ module.exports = {
                             depends: ['uglify-webpack-plugin'],
 
                             // it's ugly to do
-                            head: "var UglifyJsPlugin = require('uglify-webpack-plugin')",
+                            head: "const UglifyJsPlugin = require('uglify-webpack-plugin')",
                             plugin: `FUNC: new UglifyJSPlugin(${(() => {
                                 if (!(a | b | c | d)) return '';
 
