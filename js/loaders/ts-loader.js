@@ -15,7 +15,7 @@ module.exports = {
         }, {
             if: 'appendTsSuffixTo',
             is: '.vue',
-            detail: 'Compile typescript to javascript before getting loaded. Use Typescript in .vue script using <script lang="ts">',
+            detail: 'Compile typescript to javascript before getting loaded. Enable Typescript in .vue using <script lang="ts"> (must enable .vue explicitly)',
             depends: ['ts-loader', 'typescript'],
 
             test: /\.tsx?$/,
