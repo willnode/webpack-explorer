@@ -15,6 +15,16 @@ export default function (data = new Data()) {
             }, use: ${parseloaderuse(scheme.use)}}`
     }
 
+
+    function parseplugin(head, scheme) {
+        if (scheme.head)
+            head.push(scheme.head);
+        return [
+                parsestring(scheme.plugin),
+            ].filter(Boolean).join(', ')
+
+    }
+
     function parseloaderuse(use) {
         if (typeof use === 'string')
             return use;
@@ -49,19 +59,28 @@ export default function (data = new Data()) {
         else return name + ": " + parsestring(value)
     }
 
-    function resolvepath(head = [], path = '') {
+    function resolvepath(head = [], path = '', absolute) {
         if (Array.isArray(path)) {
-            return path.map((v) => resolvepath(head, v));
+            return path.map((v) => resolvepath(head, v, absolute));
         } else if (typeof path === 'object') {
             path = Object.assign({}, path);
             for(var i in path)
-                path[i] = resolvepath(head, path[i]);
+                path[i] = resolvepath(head, path[i], absolute);
             return path;
         }
 
         if (path.includes('/')) {
-            head.push(`import path from 'path';`)
-            return `FUNC: path.resolve(__dirname, '${path}')`;
+            if (absolute) {
+                head.push(`var path = require('path')`)
+                return `FUNC: path.resolve(__dirname, '${path}')`;
+            } else {
+                if (path.length > 1) {
+                    if (path.substr(0, 2) === '..') return path;
+                    else if (path.substr(0, 2) === './') return path;
+                    else if (path.charAt(0) === '/') return '.' + path;
+                    else return './' + path;
+                }
+            }
         } else
             return path;
     }
@@ -70,16 +89,18 @@ export default function (data = new Data()) {
 
     var ret = 'module.exports = {' +
         [
-            parseparam('entry', resolvepath(head, data.entry.length === 1 ? data.entry[0] : data.entry)),
+            parseparam('entry', resolvepath(head, data.entry.length === 1 ? data.entry[0] : data.entry, false)),
             parseparam('output', {
                 // rack up path individually
-                filename: resolvepath(head, data.output.filename),
-                path: resolvepath(head, data.output.path),
+                filename: data.output.filename,
+                path: resolvepath(head, data.output.path, true),
                 publicPath: data.output.publicPath,
                 library: data.output.library,
             }),
-            (data.loaders && data.loaders.length > 0 ? `module: { rules: [ ${
-                data.loaders.map((v) => parseloader(v)).join(', ')} ] } ` : '')
+            (data.loaders && data.loaders.length > 0 && `module: { rules: [ ${
+                data.loaders.map((v) => parseloader(v)).join(', ')} ] } `),
+            (data.plugins && data.plugins.length > 0 && `plugins: [ ${
+                data.plugins.map((v) => parseplugin(head, v)).join(', ')} ]`)
         ].filter(Boolean).join(', ')
         + '}';
 

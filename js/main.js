@@ -7,4 +7,5 @@ var vue = new Vue({
 })
 
 window.vue = vue.$children[0];
-window.update = vue.$children[0].loader_choose;
+window.updateloader = vue.$children[0].loader_choose;
+window.updateplugin = vue.$children[0].plugin_choose;

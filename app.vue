@@ -37,6 +37,25 @@
                     <button v-on:click='loaders.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
+            <div class="group" id='plugin'>
+                <h2>Plugin</h2>
+                <div id='plugin-add' class="opt">
+                    <div class="wide">
+                        <select v-model='registry.picked'>
+                            <option v-for='l in registry.plugins' :value='l'>{{ l.name }}</option>
+                        </select>
+                        <button class="rem" :disabled='!registry.candidate' v-on:click='plugins.push(registry.candidate)'>+</button>
+                    </div>
+                    <div class="setup-wide" v-if='registry.picked' v-html='plugin_filter()'>
+                    </div>
+                    <div class="info" v-if='registry.candidate'> {{ registry.candidate.detail }} </div>
+                </div>
+                <div v-for='(l, i) in plugins' class="wide">
+                    <span :title="l.detail">
+                        <b>{{ l.depends[0] }}</b> - {{ l.is.toString() }}</span>
+                    <button v-on:click='plugins.splice(i, 1)' class="rem">-</button>
+                </div>
+            </div>
         </div>
         <div class="right">
             <h1 class="hero-2">Output</h1>

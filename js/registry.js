@@ -9,9 +9,14 @@ export default {
         require('./loaders/vue-loader'),
         require('./loaders/file-loader'),
     ],
+    plugins: [
+        require('./plugins/uglifyjs-webpack-plugin')
+    ],
 
     // dummy variables used during runtime
-    selected: '',
-    active: '',
-    yarn: false,
+    selected: '', // selected loader type
+    active: '', // selected loader scheme
+    picked: '', // selected plugin type
+    candidate: '', // selected plugin scheme
+    yarn: false, // yarn or npm?
 }

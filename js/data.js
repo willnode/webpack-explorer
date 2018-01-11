@@ -38,12 +38,12 @@ var data = {
             // we're using runtime-only vue so do this legitimely.
             if (typeof val === 'boolean')
                 html += `<div><span>${prop}</span><input id='${id}' name='loader-filter' type="checkbox" ` +
-                    `onchange="${name}=document.getElementById('${id}').checked;update()" ${window[name] && 'checked'}></div>`
+                    `onchange="${name}=document.getElementById('${id}').checked;updateloader()" ${window[name] && 'checked'}></div>`
             else if (Array.isArray(val))
-                html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;update()">` +
+                html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;updateloader()">` +
                     val.map((v) => `<option ${window[name] === v && 'selected'}>${v}</option>`).join('') + '</select></div>'
         }
-        window.update();
+        window.updateloader();
         return html;
     },
     loader_choose: () => {
@@ -65,10 +65,55 @@ var data = {
         }
         return data.registry.active.detail;
     },
+    plugin_filter: () => {
+        var html = '';
+        for (var prop in data.registry.picked.options) {
+            var val = data.registry.picked.options[prop];
+            var id = '__' + prop;
+            var name = '___' + prop;
+            if (window[name] === undefined) {
+                window[name] = Array.isArray(val) ? val[0] : val;
+            }
+
+            // we're using runtime-only vue so do this legitimely.
+            if (typeof val === 'boolean')
+                html += `<div><span>${prop}</span><input id='${id}' name='plugin-filter' type="checkbox" ` +
+                    `onchange="${name}=document.getElementById('${id}').checked;updateplugin()" ${window[name] && 'checked'}></div>`
+            else if (Array.isArray(val))
+                html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;updateplugin()">` +
+                    val.map((v) => `<option ${window[name] === v && 'selected'}>${v}</option>`).join('') + '</select></div>'
+        }
+        window.updateplugin();
+        return html;
+    },
+    plugin_choose: () => {
+        var sel = data.registry.picked;
+        for (var scheme of sel.schemes) {
+            if (typeof scheme.if === 'string') {
+                if (window['___' + scheme.if] === scheme.is) {
+                    if (data.registry.candidate !== scheme)
+                        data.registry.candidate = scheme;
+                    break;
+                }
+            } else if (Array.isArray(scheme.if)) {
+                if (scheme.if.every((v, i) => window['___' + v] === scheme.is[i])) {
+                    if (data.registry.candidate !== scheme)
+                        data.registry.candidate = scheme;
+                    break;
+                }
+            }
+        }
+        return data.registry.candidate.detail;
+    },
     depedencies: () => {
         var dev = ['webpack'];
 
         for (var l of data.loaders)
+            if (l.depends)
+                for (var ll of l.depends)
+                    dev.push(ll)
+
+        for (var l of data.plugins)
             if (l.depends)
                 for (var ll of l.depends)
                     dev.push(ll)
