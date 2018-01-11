@@ -23,7 +23,7 @@ var opts = {
 };
 
 module.exports = {
-    desc: '.js',
+    name: '.js\t(babel-loader)',
     options: opts,
     schemes: (() => {
         var bools = [false, true];
@@ -36,12 +36,15 @@ module.exports = {
                         schemes.push({
                             if: ['env', 'react', 'flow', 'minify'],
                             is: [opts.env[i], b, c, d],
-                            detail: (() => 'Transpile javascript to ' + [ (i !== i_off ? 'compatible with ' : '') + opts_detail.env[i],
-                                b && opts_detail.react, c && opts_detail.flow, d && opts_detail.minify].filter(Boolean).join(' and '))(),
-                            depends: ['babel-core', i !== i_off && 'babel-preset-env', b && 'babel-preset-react', c && 'babel-preset-flow', d && 'babel-preset-minify'].filter(Boolean),
+                            detail: (() => 'Transpile javascript to ' + [(i !== i_off ? 'compatible with ' : '') + opts_detail.env[i],
+                            b && opts_detail.react, c && opts_detail.flow, d && opts_detail.minify].filter(Boolean).join(' and '))(),
+
+                            depends: ['babel-core', i !== i_off && 'babel-preset-env', b && 'babel-preset-react',
+                                b && 'react', b && 'react-dom', c && 'babel-preset-flow', d && 'babel-preset-minify'].filter(Boolean),
 
                             test: b ? /\.jsx?$/ : /\.js$/,
                             exclude: /node_modules/,
+
                             use: {
                                 loader: 'babel-loader',
                                 options: {

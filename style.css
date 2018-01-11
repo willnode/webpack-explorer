@@ -10,7 +10,7 @@ body {
     align-content: center;
 }
 
-.hero-desc {
+.hero-name {
     font-style: italic;
 }
 
@@ -48,7 +48,7 @@ body {
 
 .setup-wide > div > span {
     flex-grow: 0;
-    width: 100px;
+    min-width: 100px;
 }
 
 .setup-wide > div {

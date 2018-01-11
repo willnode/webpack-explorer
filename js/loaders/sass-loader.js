@@ -1,5 +1,5 @@
 module.exports = {
-    desc: '.scss',
+    name: '.scss\t(sass-loader)',
     options: {
         sourceMap: false,
     },

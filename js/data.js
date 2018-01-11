@@ -27,24 +27,23 @@ var data = {
     },
     loader_filter: () => {
         var html = '';
-       // var flag = false;
         for (var prop in data.registry.selected.options) {
             var val = data.registry.selected.options[prop];
             var id = '__' + prop;
             var name = '___' + prop;
             if (window[name] === undefined) {
                 window[name] = Array.isArray(val) ? val[0] : val;
-           //     flag = true;
             }
+
+            // we're using runtime-only vue so do this legitimely.
             if (typeof val === 'boolean')
-                html += `<div><span>${prop}</span><input id='${id}' name='loader-filter' type="checkbox"
-onchange="${name}=document.getElementById('${id}').checked;update()" ${window[name] && 'checked'}></div>`
+                html += `<div><span>${prop}</span><input id='${id}' name='loader-filter' type="checkbox" ` +
+                    `onchange="${name}=document.getElementById('${id}').checked;update()" ${window[name] && 'checked'}></div>`
             else if (Array.isArray(val))
                 html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;update()">` +
-                    val.map((v) => `<option ${ window[name] === v && 'selected' }>${v}</option>`).join('') + '</select></div>'
+                    val.map((v) => `<option ${window[name] === v && 'selected'}>${v}</option>`).join('') + '</select></div>'
         }
-      //  if (flag)
-            window.update();
+        window.update();
         return html;
     },
     loader_choose: () => {

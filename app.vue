@@ -2,7 +2,7 @@
     <div>
         <div class="left">
             <h1 class="hero">Webpack Explorer</h1>
-            <span class="hero-desc" title="And don't waste time dangling with docs!">Webpack config template and generator</span>
+            <span class="hero-name" title="And don't waste time dangling with docs!">Webpack config template and generator</span>
             <div class="group" id='entry'>
                 <h2>Entry</h2>
                 <div class="wide" v-for='(e, i) in entry'>
@@ -15,7 +15,7 @@
                 <h2>Output</h2>
                 <input class="wide" v-model='output.filename' placeholder="file name"></input>
                 <input class="wide" :class='{ opt: !output.path }' v-model='output.path' placeholder="path"></input>
-                <input class="wide" :class='{ opt: !output.publicpath }' v-model='output.publicpath' placeholder="public path"></input>
+                <input class="wide" :class='{ opt: !output.publicPath }' v-model='output.publicPath' placeholder="public path"></input>
                 <input class="wide" :class='{ opt: !output.library }' v-model='output.library' placeholder="library"></input>
             </div>
             <div class="group" id='loader'>
@@ -23,7 +23,7 @@
                 <div id='loader-add' class="opt">
                     <div class="wide">
                         <select v-model='registry.selected'>
-                            <option v-for='l in registry.loaders' :value='l'>{{ l.desc }}</option>
+                            <option v-for='l in registry.loaders' :value='l'>{{ l.name }}</option>
                         </select>
                         <button class="rem" :disabled='!registry.active' v-on:click='loaders.push(registry.active)'>+</button>
                     </div>

@@ -12,7 +12,7 @@ export default function (data = new Data()) {
                 parseparam('exclude', scheme.exclude),
                 parseparam('include', scheme.include),
             ].filter(Boolean).join(', ')
-        }, use: ${parseloaderuse(scheme.use)}}`
+            }, use: ${parseloaderuse(scheme.use)}}`
     }
 
     function parseloaderuse(use) {
@@ -25,8 +25,12 @@ export default function (data = new Data()) {
     function parsestring(str) {
         if (!str)
             return ''
-        else if (typeof str === 'string')
-            return `'${str.replace(jsonescape, '\\$1')}'`;
+        else if (typeof str === 'string') {
+            if (str.substring(0, 6) === 'FUNC: ')
+                return str.substring(6); // little hack
+            else
+                return `'${str.replace(jsonescape, '\\$1')}'`;
+        }
         else if (str instanceof RegExp)
             return str.toString()
         else if (Array.isArray(str))
@@ -45,13 +49,45 @@ export default function (data = new Data()) {
         else return name + ": " + parsestring(value)
     }
 
-    return 'module.exports = {' +
+    function resolvepath(head = [], path = '') {
+        if (Array.isArray(path)) {
+            return path.map((v) => resolvepath(head, v));
+        } else if (typeof path === 'object') {
+            path = Object.assign({}, path);
+            for(var i in path)
+                path[i] = resolvepath(head, path[i]);
+            return path;
+        }
+
+        if (path.includes('/')) {
+            head.push(`import path from 'path';`)
+            return `FUNC: path.resolve(__dirname, '${path}')`;
+        } else
+            return path;
+    }
+
+    var head = [];
+
+    var ret = 'module.exports = {' +
         [
-            parseparam('entry', data.entry.length === 1 ? data.entry[0] : data.entry),
-            parseparam('output', data.output),
+            parseparam('entry', resolvepath(head, data.entry.length === 1 ? data.entry[0] : data.entry)),
+            parseparam('output', {
+                // rack up path individually
+                filename: resolvepath(head, data.output.filename),
+                path: resolvepath(head, data.output.path),
+                publicPath: data.output.publicPath,
+                library: data.output.library,
+            }),
             (data.loaders && data.loaders.length > 0 ? `module: { rules: [ ${
                 data.loaders.map((v) => parseloader(v)).join(', ')} ] } ` : '')
         ].filter(Boolean).join(', ')
         + '}';
+
+    if (head.length > 0) {
+        head = head.filter((v, i, a) => a.indexOf(v) === i);
+        head.push('', '');
+    }
+
+    return head.join('\n') + ret;
 }
 

@@ -1,5 +1,5 @@
 module.exports = {
-    desc: '.vue',
+    name: '.vue\t(vue-loader)',
     options: {
         useStyle: ['none', 'css', 'sass'],
     },
