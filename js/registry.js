@@ -2,16 +2,16 @@
 
 export default {
     loaders: [
-        require('./loaders/babel-loader'),
-        require('./loaders/css-loader'),
-        require('./loaders/sass-loader'),
-        require('./loaders/ts-loader'),
-        require('./loaders/vue-loader'),
-        require('./loaders/file-loader'),
+        require('./loaders/babel-loader').default,
+        require('./loaders/css-loader').default,
+        require('./loaders/sass-loader').default,
+        require('./loaders/ts-loader').default,
+        require('./loaders/vue-loader').default,
+        require('./loaders/file-loader').default,
     ],
     plugins: [
-        require('./plugins/uglifyjs-webpack-plugin'),
-        require('./plugins/progress-bar-webpack-plugin')
+        require('./plugins/uglifyjs-webpack-plugin').default,
+        require('./plugins/progress-bar-webpack-plugin').default
     ],
 
     // dummy variables used during runtime

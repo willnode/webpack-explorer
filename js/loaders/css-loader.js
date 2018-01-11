@@ -1,30 +1,30 @@
-module.exports = {
-    name: '.css\t(css-loader)',
+import {parsestring} from '../template'
+
+var loader_desc = ['as a script that inject <style> tag to Html DOM',
+    'to outside bundle and return its public path', 'into javascript bundle as a module']
+
+export default {
+    name: 'css-loader',
     options: {
+        loader: { keys: ['style-loader', 'extract-text-webpack-plugin', 'none'], value: 'style-loader' },
         sourceMap: false,
     },
-    schemes: [
-        {
-            if: 'sourceMap',
-            is: false,
-            detail: 'require() a css file and deliver its content to javascript',
-            depends: ['style-loader', 'css-loader'],
+    scheme: (op) => {
+        var extract = op.loader.value === 'extract-text-webpack-plugin';
+        var cssload = op.sourceMap ? {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true
+            }
+        } : 'css-loader';
+        return {
+            detail: 'put CSS content ' + loader_desc[op.loader.keys.indexOf(op.loader.value)] + (op.sourceMap ? ' and generate a source map' : ''),
+            depends: [op.loader.value !== 'none' && op.loader.value, 'css-loader'].filter(Boolean),
 
+            head: extract ? ["const ExtractTextPlugin = require('extract-text-webpack-plugin')"] : undefined,
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-        }, {
-            if: 'sourceMap',
-            is: true,
-            detail: 'require() a css file and deliver its content to javascript with the source map',
-            depends: ['style-loader', 'css-loader'],
-
-            test: /\.css$/,
-            use: ['style-loader', {
-                loader: 'css-loader',
-                options: {
-                    sourceMap: true
-                }
-            }]
+            use: extract ? `FUNC: ExtractTextPlugin.extract([${parsestring(cssload)}])` :
+            (op.loader.value === 'none' ? [cssload] : ['style-loader', cssload])
         }
-    ]
+    }
 }

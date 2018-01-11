@@ -26,9 +26,9 @@
             <input type="radio" class='hide' name='hide' id='output-hide'>
             <div class="group" id='output'>
                 <input class="wide" v-model='output.filename' placeholder="file name"></input>
-                <input class="wide" :class='{ opt: !output.path }' v-model='output.path' placeholder="path"></input>
-                <input class="wide" :class='{ opt: !output.publicPath }' v-model='output.publicPath' placeholder="public path"></input>
-                <input class="wide" :class='{ opt: !output.library }' v-model='output.library' placeholder="library"></input>
+                <input class="wide" v-model='output.path' placeholder="path"></input>
+                <input class="wide" v-model='output.publicPath' placeholder="public path"></input>
+                <input class="wide" v-model='output.library' placeholder="library"></input>
             </div>
             <!---->
             <label for='loader-hide'>
@@ -36,20 +36,31 @@
             </label>
             <input type="radio" class='hide' name='hide' id='loader-hide'>
             <div class="group" id='loader'>
-                <div id='loader-add' class="opt">
+                <div id='loader-add'>
                     <div class="wide">
-                        <select v-model='registry.selected'>
+                        <select v-model='registry.selected' @change='loader_choose()'>
                             <option v-for='l in registry.loaders' :value='l'>{{ l.name }}</option>
                         </select>
                         <button class="rem" :disabled='!registry.active' v-on:click='loaders.push(registry.active); registry.selected=registry.active=""'>+</button>
                     </div>
-                    <div class="setup-wide" v-if='registry.selected' v-html='loader_filter()'>
+                    <div class="setup-wide" v-if='registry.selected'>
+                        <div v-for='(v, k) in registry.selected.options'>
+                            <span>{{k}}</span>
+                            <select v-if='v.keys' v-model='registry.selected.options[k].value' @change='loader_choose()'>
+                                <option v-for='k in v.keys'>{{k}}</option>
+                            </select>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @change='loader_choose()'>
+                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.selected.options[k]' @change='loader_choose()'>
+                        </div>
                     </div>
-                    <div class="info" v-if='registry.active'> {{ registry.active.detail }} </div>
+                    <div v-if='registry.active' class="info">
+                        <span>require() with {{ registry.selected.name }} to</span>
+                        <span><i>{{ registry.active.detail }}</i></span>
+                    </div>
                 </div>
                 <div v-for='(l, i) in loaders' class="wide">
                     <span :title="l.detail">
-                        <b>{{ l.test.toString() }}</b> - {{ l.is.toString() }}</span>
+                        <b>{{ l.test }}</b> - {{ l.is }}</span>
                     <button v-on:click='loaders.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
@@ -59,23 +70,35 @@
             </label>
             <input type="radio" class='hide' name='hide' id='plugin-hide'>
             <div class="group" id='plugin'>
-                <div id='plugin-add' class="opt">
+                <div id='plugin-add'>
                     <div class="wide">
-                        <select v-model='registry.picked'>
+                        <select v-model='registry.picked' @change='plugin_choose()'>
                             <option v-for='l in registry.plugins' :value='l'>{{ l.name }}</option>
                         </select>
                         <button class="rem" :disabled='!registry.candidate' v-on:click='plugins.push(registry.candidate); registry.picked=registry.candidate=""'>+</button>
                     </div>
-                    <div class="setup-wide" v-if='registry.picked' v-html='plugin_filter()'>
+                    <div class="setup-wide" v-if='registry.picked'>
+                        <div v-for='(v, k) in registry.picked.options'>
+                            <span>{{k}}</span>
+                            <select v-if='v.keys' v-model='registry.picked.options[k].value' @change='plugin_choose()'>
+                                <option v-for='k in v.keys'>{{k}}</option>
+                            </select>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @change='plugin_choose()'>
+                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.picked.options[k]' @change='plugin_choose()'>
+                        </div>
                     </div>
-                    <div class="info" v-if='registry.candidate'> {{ registry.candidate.detail }} </div>
+                    <div v-if='registry.candidate' class="info">
+                        <span>Use {{ registry.picked.name }} to</span>
+                        <span><i>{{ registry.candidate.detail }}</i></span>
+                    </div>
                 </div>
                 <div v-for='(l, i) in plugins' class="wide">
                     <span :title="l.detail">
-                        <b>{{ l.depends[0] }}</b> - {{ l.is || '' }}</span>
+                        <b>{{ l.test }}</b> - {{ l.is }}</span>
                     <button v-on:click='plugins.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
+
         </div>
         <div class="right">
             <h1 class="hero-2">Output</h1>

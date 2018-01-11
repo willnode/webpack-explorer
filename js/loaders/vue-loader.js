@@ -1,25 +1,16 @@
-module.exports = {
-    name: '.vue\t(vue-loader)',
+export default  {
+    name: 'vue-loader',
     options: {
         sass: false,
     },
-    schemes: [
-        {
-            if: 'sass',
-            is: false,
-            detail: 'Load and parse .vue template during bundle.',
-            depends: ['vue-loader', 'vue-template-compiler', 'css-loader'],
+    scheme: (op) => {
+        return {
+            detail: 'Load and parse .vue template during bundle.' + (op.sass ? 'Use Sass/SCSS in styles using <style lang="scss">' : ''),
+            depends: ['vue-loader', 'vue-template-compiler', 'css-loader']
+                .concat(op.sass ? ['sass-loader', 'node-sass', 'vue-style-loader'] : []),
 
             test: /\.vue$/,
-            use: ['vue-loader']
-        }, {
-            if: 'sass',
-            is: true,
-            detail: 'Load and parse .vue template during bundle. Use Sass/SCSS in styles using <style lang="scss">',
-            depends: ['vue-loader', 'vue-template-compiler', 'sass-loader', 'node-sass', 'css-loader', 'vue-style-loader'],
-
-            test: /\.vue$/,
-            use: [{
+            use: [op.sass ? {
                 loader: "vue-loader",
                 options: {
                     loaders: {
@@ -35,7 +26,7 @@ module.exports = {
                         ]
                     }
                 }
-            }]
+            } : 'vue-loader']
         }
-    ]
+    }
 }

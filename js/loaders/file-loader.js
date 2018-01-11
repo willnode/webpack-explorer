@@ -5,37 +5,28 @@ var tests = [/\.(gif|jpe?g|png|svg)/, /\.(wav|mp3|mp4|mkv|webm)/,
     /\.(txt|md|pdf|rtf|docx|xlsx|pptx)/, /\.(raw|bin|zip|rar|json|ya?ml|csv)/]
 var names = ['[hash].[ext]', '[path][name].[ext]'];
 
-module.exports = {
-    name: 'file\t(file-loader)',
+export default {
+    name: 'file-loader',
     options: {
-        files: files,
-        name: names,
+        files: { keys: files, value: 'images' },
+        name: { keys: names, value: '[hash].[ext]' },
+        publicPath: '',
         emitFile: true,
     },
-    schemes: (() => {
-        var bools = [false, true];
-        var schemes = [];
-        for (var a = 0; a < files.length; a++)
-            for (var b = 0; b < names.length; b++)
-                for (var c of bools) {
-                    schemes.push({
-                        if: ['files', 'name', 'emitFile'],
-                        is: [files[a], names[b], c],
-                        detail: 'Retrieve path of loaded ' + files[a] + (b === 1 ? ' with custom format [path][name].[ext]' : '')
-                            + (!c ? ' without emitting to publicPath' : ''),
+    scheme: (op) => {
+        return {
+            detail: 'retrieve the public path of loaded ' + op.files.value + (op.name.value !== '[hash].[ext]' ? ' with custom format [path][name].[ext]' : '')
+                + (!op.emitFile ? ' without actually emitting files to public path' : ''),
 
-                        depends: ['file-loader'],
-                        test: tests[a],
+            depends: ['file-loader'],
+            test: tests[op.files.keys.indexOf(op.files.value)],
 
-                        use: [c ? 'file-loader' : {
-                            loader: 'file-loader',
-                            options: {
-                                emitFile: false
-                            }
-                        }]
-                    })
+            use: [op.emitFile ? 'file-loader' : {
+                loader: 'file-loader',
+                options: {
+                    emitFile: false
                 }
-        return schemes;
-    })()
-
+            }]
+        }
+    }
 }

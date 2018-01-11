@@ -1,30 +1,22 @@
-module.exports = {
-    name: '.ts\t(ts-loader)',
+export default  {
+    name: 'ts-loader',
     options: {
-        appendTsSuffixTo: ['none', '.vue'],
+        appendTsSuffixTo: { keys: ['none', '.vue'], value: 'none' },
     },
-    schemes: [
-        {
-            if: 'appendTsSuffixTo',
-            is: 'none',
-            detail: 'Compile typescript to javascript before getting loaded.',
+    scheme: (op) => {
+        var vue = op.appendTsSuffixTo === '.vue';
+        return {
+            detail: 'compile .ts to javascript before getting required' +
+                (vue ? ' and enable Typescript in .vue using <script lang="ts"> (must enable .vue explicitly)' : ''),
             depends: ['ts-loader', 'typescript'],
 
             test: /\.tsx?$/,
-            use: ['ts-loader']
-        }, {
-            if: 'appendTsSuffixTo',
-            is: '.vue',
-            detail: 'Compile typescript to javascript before getting loaded. Enable Typescript in .vue using <script lang="ts"> (must enable .vue explicitly)',
-            depends: ['ts-loader', 'typescript'],
-
-            test: /\.tsx?$/,
-            use: [{
+            use: [vue ? {
                 loader: 'ts-loader',
                 options: {
                     appendTsSuffixTo: /\.vue$/
                 }
-            }]
+            } : 'ts-loader']
         }
-    ]
+    }
 }

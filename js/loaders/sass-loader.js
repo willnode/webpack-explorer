@@ -1,34 +1,25 @@
-module.exports = {
-    name: '.scss\t(sass-loader)',
+export default  {
+    name: 'sass-loader',
     options: {
         sourceMap: false,
     },
-    schemes: [
-        {
-            if: 'sourceMap',
-            is: false,
-            detail: 'Load .scss file as ?',
+    scheme: (op) => {
+        return {
+            detail: 'require() a scss file and deliver its css content to javascript' + (op.sourceMap ? '  with the source map' : ''),
             depends: ['sass-loader', 'css-loader', 'style-loader', 'node-sass'],
 
             test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'sass-loader']
-        }, {
-            if: 'sourceMap',
-            is: true,
-            detail: 'Load .scss file as ?. With source map',
-            depends: ['sass-loader', 'css-loader', 'style-loader', 'node-sass'],
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader", options: {
+            use: ['style-loader', op.sourceMap ? {
+                loader: 'css-loader',
+                options: {
                     sourceMap: true
                 }
-            }, {
-                loader: "sass-loader", options: {
+            } : 'css-loader', op.sourceMap ? {
+                loader: 'sass-loader',
+                options: {
                     sourceMap: true
                 }
-            }]
+            } : 'sass-loader']
         }
-    ]
+    }
 }

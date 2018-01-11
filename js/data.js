@@ -25,89 +25,13 @@ var data = {
         var bs = beautify(Template(data), { indent_size: 2 });
         return hljs.highlightAuto(bs).value;
     },
-    loader_filter: () => {
-        var html = '';
-        for (var prop in data.registry.selected.options) {
-            var val = data.registry.selected.options[prop];
-            var id = '__' + prop;
-            var name = '___' + prop;
-            if (window[name] === undefined) {
-                window[name] = Array.isArray(val) ? val[0] : val;
-            }
-
-            // we're using runtime-only vue so do this legitimely.
-            if (typeof val === 'boolean')
-                html += `<div><span>${prop}</span><input id='${id}' name='loader-filter' type="checkbox" ` +
-                    `onchange="${name}=document.getElementById('${id}').checked;updateloader()" ${window[name] && 'checked'}></div>`
-            else if (Array.isArray(val))
-                html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;updateloader()">` +
-                    val.map((v) => `<option ${window[name] === v && 'selected'}>${v}</option>`).join('') + '</select></div>'
-        }
-        window.updateloader();
-        return html;
-    },
     loader_choose: () => {
-        var apply = (scheme) => { if (data.registry.active !== scheme) data.registry.active = scheme; }
         var sel = data.registry.selected;
-        for (var scheme of sel.schemes) {
-            if (!scheme.if) {
-                apply(scheme);
-                break;
-            } else if (typeof scheme.if === 'string') {
-                if (window['___' + scheme.if] === scheme.is) {
-                    apply(scheme);
-                    break;
-                }
-            } else if (Array.isArray(scheme.if)) {
-                if (scheme.if.every((v, i) => window['___' + v] === scheme.is[i])) {
-                    apply(scheme);
-                    break;
-                }
-            }
-        }
-        return data.registry.active.detail;
-    },
-    plugin_filter: () => {
-        var html = '';
-        for (var prop in data.registry.picked.options) {
-            var val = data.registry.picked.options[prop];
-            var id = '__' + prop;
-            var name = '___' + prop;
-            if (window[name] === undefined) {
-                window[name] = Array.isArray(val) ? val[0] : val;
-            }
-
-            // we're using runtime-only vue so do this legitimely.
-            if (typeof val === 'boolean')
-                html += `<div><span>${prop}</span><input id='${id}' name='plugin-filter' type="checkbox" ` +
-                    `onchange="${name}=document.getElementById('${id}').checked;updateplugin()" ${window[name] && 'checked'}></div>`
-            else if (Array.isArray(val))
-                html += `<div><span>${prop}</span><select id='${id}' onchange="${name}=document.getElementById('${id}').value;updateplugin()">` +
-                    val.map((v) => `<option ${window[name] === v && 'selected'}>${v}</option>`).join('') + '</select></div>'
-        }
-        window.updateplugin();
-        return html;
+        data.registry.active = sel.scheme(sel.options);
     },
     plugin_choose: () => {
-        var apply = (scheme) => { if (data.registry.candidate !== scheme) data.registry.candidate = scheme; }
         var sel = data.registry.picked;
-        for (var scheme of sel.schemes) {
-            if (!scheme.if) {
-                apply(scheme);
-                break;
-            } else if (typeof scheme.if === 'string') {
-                if (window['___' + scheme.if] === scheme.is) {
-                    apply(scheme);
-                    break;
-                }
-            } else if (Array.isArray(scheme.if)) {
-                if (scheme.if.every((v, i) => window['___' + v] === scheme.is[i])) {
-                    apply(scheme);
-                    break;
-                }
-            }
-        }
-        return data.registry.candidate.detail;
+        data.registry.candidate = sel.scheme(sel.options);
     },
     depedencies: () => {
         var dev = ['webpack'];
