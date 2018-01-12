@@ -1,5 +1,6 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ProgressBar = require('progress-bar-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
   entry: './js/main.js',
@@ -19,10 +20,11 @@ module.exports = {
     }]
   },
   plugins: [
+   new webpack.ProgressPlugin()
     //new UglifyJsPlugin({ parallel: true }),
-    new ProgressBar()
+   // new ProgressBar()
   ],
-  devtool: "cheap-module-eval-source-map",
+  devtool: "cheap-source-map" /*"cheap-module-eval-source-map" <- webpack goes buggy*/,
   watch: true,
   watchOptions: {
     poll: 1000,

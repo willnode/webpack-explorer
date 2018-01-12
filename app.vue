@@ -49,18 +49,21 @@
                             <select v-if='v.keys' v-model='registry.selected.options[k].value' @change='loader_choose()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.selected.options[k]' @change='plugin_choose()'>
                             <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @change='loader_choose()'>
                             <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.selected.options[k]' @change='loader_choose()'>
                         </div>
                     </div>
                     <div v-if='registry.active' class="info">
                         <span>require() with {{ registry.selected.name }} to</span>
-                        <span><i>{{ registry.active.detail }}</i></span>
+                        <span>
+                            <i>{{ registry.active.detail }}</i>
+                        </span>
                     </div>
                 </div>
-                <div v-for='(l, i) in loaders' class="wide">
-                    <span :title="l.detail">
-                        <b>{{ l.test }}</b> - {{ l.is }}</span>
+                <div v-for='(l, i) in loaders' class="wide list">
+                    <span :title="l.depends">
+                        <b>{{ l.test.toString() }}</b> - {{ l.detail }}</span>
                     <button v-on:click='loaders.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
@@ -83,18 +86,21 @@
                             <select v-if='v.keys' v-model='registry.picked.options[k].value' @change='plugin_choose()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.picked.options[k]' @change='plugin_choose()'>
                             <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @change='plugin_choose()'>
                             <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.picked.options[k]' @change='plugin_choose()'>
                         </div>
                     </div>
                     <div v-if='registry.candidate' class="info">
                         <span>Use {{ registry.picked.name }} to</span>
-                        <span><i>{{ registry.candidate.detail }}</i></span>
+                        <span>
+                            <i>{{ registry.candidate.detail }}</i>
+                        </span>
                     </div>
                 </div>
-                <div v-for='(l, i) in plugins' class="wide">
-                    <span :title="l.detail">
-                        <b>{{ l.test }}</b> - {{ l.is }}</span>
+                <div v-for='(l, i) in plugins' class="wide list">
+                    <span :title="l.depends">
+                        <b>{{ l.depends[0] }}</b> - {{ l.detail }}</span>
                     <button v-on:click='plugins.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>

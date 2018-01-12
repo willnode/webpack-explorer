@@ -1,15 +1,14 @@
 export default {
     name: 'uglify-webpack-plugin',
     options: {
-        cache: false,
         parallel: false,
         beautify: false,
-        ie8: false
+        sourceMap: true,
     },
     scheme: (op) => {
         return {
             detail: [(op.beautify ? 'beautify' : 'minify') + ' the bundled javascript',
-            op.cache && 'caching enabled', op.parallel && 'parallel process enabled', op.ie8 && 'support to IE8'
+            op.parallel && 'parallel process enabled', op.sourceMap && 'with source maps enabled'
             ].filter(Boolean).join(' with '),
 
             depends: ['uglify-webpack-plugin'],
@@ -17,11 +16,10 @@ export default {
             // it's ugly to do
             head: "const UglifyJsPlugin = require('uglify-webpack-plugin')",
             plugin: `FUNC: new UglifyJSPlugin(${(() => {
-                if (!(op.cache | op.parallel | op.beautify | op.ie8)) return '';
+                if (!(op.beautify | op.parallel | op.sourceMap)) return '';
 
-                return `{${[op.cache && 'cache:true', op.parallel && 'parallel:true', (op.beautify | op.ie8) &&
-                    (`uglifyOptions: {${[op.beautify && 'mangle:false,output:{beautify:true}', op.ie8
-                        && 'ie8:true'].filter(Boolean).join()}}`)].filter(Boolean).join()}}`
+                return `{${[op.sourceMap && 'sourceMap:true', op.parallel && 'parallel:true', op.beautify &&
+                    (`uglifyOptions: {mangle:false,output:{beautify:true}' }}`)].filter(Boolean).join()}}`
             })()})`
         }
     }

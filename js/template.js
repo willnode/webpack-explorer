@@ -35,15 +35,16 @@ function parseplugin(head, scheme) {
 }
 
 export function parsestring(str) {
-    if (!str)
+    if (str === undefined)
         return ''
-    else if (typeof str === 'string') {
+    var type = typeof str;
+    if (type === 'string') {
         if (str.substring(0, 6) === 'FUNC: ')
             return str.substring(6); // little hack
         else
             return `'${str.replace(jsonescape, '\\$1')}'`;
     }
-    else if (str instanceof RegExp)
+    else if (str instanceof RegExp || type === 'boolean' || type === 'number')
         return str.toString()
     else if (Array.isArray(str))
         return `[ ${str.map((s) => parsestring(s)).filter(Boolean).join(', ')} ]`

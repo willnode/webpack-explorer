@@ -1,8 +1,6 @@
-// this file has 4*2*2 = 16 variants! Keep the DRY!
-
 var files = ['images', 'audio and videos', 'document', 'data'];
 var tests = [/\.(gif|jpe?g|png|svg)/, /\.(wav|mp3|mp4|mkv|webm)/,
-    /\.(txt|md|pdf|rtf|docx|xlsx|pptx)/, /\.(raw|bin|zip|rar|json|ya?ml|csv)/]
+    /\.(txt|md|pdf|rtf|docx)/, /\.(raw|zip|json|ya?ml|csv)/]
 var names = ['[hash].[ext]', '[path][name].[ext]'];
 
 export default {
@@ -15,7 +13,7 @@ export default {
     },
     scheme: (op) => {
         return {
-            detail: 'retrieve the public path of loaded ' + op.files.value + (op.name.value !== '[hash].[ext]' ? ' with custom format [path][name].[ext]' : '')
+            detail: 'return the public path of loaded ' + op.files.value + (op.name.value !== '[hash].[ext]' ? ' with custom format [path][name].[ext]' : '')
                 + (!op.emitFile ? ' without actually emitting files to public path' : ''),
 
             depends: ['file-loader'],

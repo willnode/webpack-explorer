@@ -19,6 +19,7 @@ export default {
         } : 'css-loader';
         return {
             detail: 'put CSS content ' + loader_desc[op.loader.keys.indexOf(op.loader.value)] + (op.sourceMap ? ' and generate a source map' : ''),
+            warn: extract ? 'must add extract-text-webpack-plugin as .css file explicitly' : undefined,
             depends: [op.loader.value !== 'none' && op.loader.value, 'css-loader'].filter(Boolean),
 
             head: extract ? ["const ExtractTextPlugin = require('extract-text-webpack-plugin')"] : undefined,
