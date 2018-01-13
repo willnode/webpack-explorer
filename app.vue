@@ -114,8 +114,8 @@
             <pre id='generated' v-html='renderz()' class="hljs"></pre>
             <h2 style="cursor: pointer" v-on:click='registry.yarn=!registry.yarn'> {{ registry.yarn ? 'yarn' : 'npm' }} depedencies</h2>
             <pre id='generated' class="hljs wrap">{{ registry.yarn ? 'yarn add' : 'npm install' }} <span class="hljs-attr npm-link" v-html='depedencies()'></span><span style="white-space:nowrap"> {{ registry.yarn ? '--dev' : '--save-dev' }}</span></pre>
-            <h2>case example</h2>
-            <pre class="hljs">TODO</pre>
+            <!--h2>case example</h2>
+            <pre class="hljs">TODO</pre-->
         </div>
     </div>
 </template>

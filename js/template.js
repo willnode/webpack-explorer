@@ -102,7 +102,7 @@ function parseentry(head, entry = []) {
         return `{${entry.map((v) => parseparam(v.key, resolvepath(head, v.value, false))).filter(Boolean).join(',')}}`;
     } else {
         if (entry.length === 1)
-            return `'${entry[0].value.replace(jsonescape, '\\$1')}'`;
+            return `'${resolvepath(head, entry[0].value, false).replace(jsonescape, '\\$1')}'`;
         else
             return `[${entry.map((v) => parsestring(resolvepath(head, v.value, false))).filter(Boolean).join(',')}]`
     }
