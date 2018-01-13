@@ -30,7 +30,7 @@
                 <input class="wide" v-model='output.publicPath' placeholder="public path"></input>
                 <input class="wide" v-model='output.library' placeholder="library"></input>
             </div>
-            <!---->
+            <!--LOADER-->
             <label for='loader-hide'>
                 <h2>Loader</h2>
             </label>
@@ -55,10 +55,12 @@
                         </div>
                     </div>
                     <div v-if='registry.active' class="info">
-                        <span>require() with {{ registry.selected.name }} to</span>
+                        <span>require() with {{ registry.selected.name }} will return</span>
                         <span>
                             <i>{{ registry.active.detail }}</i>
                         </span>
+                        <div v-if='registry.active.warn'><br><span>NOTE:</span> <span v-html='registry.active.warn'></span></div>
+                        <pre v-html='loader_renderz()' class="hljs"></pre>
                     </div>
                 </div>
                 <div v-for='(l, i) in loaders' class="wide list">
@@ -67,7 +69,7 @@
                     <button v-on:click='loaders.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
-            <!---->
+            <!--PLUGIN-->
             <label for='plugin-hide'>
                 <h2>Plugin</h2>
             </label>

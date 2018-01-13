@@ -1,0 +1,20 @@
+import { is, allFalsy } from '../toolkit';
+
+export default {
+    name: 'eslint-loader',
+    options: {
+        autofix: false,
+    },
+    scheme: (op) => {
+        return {
+            detail: `the same javascript object, after being checked ${
+                is(op.autofix, 'and fixed ')}by ESLint`,
+
+            depends: ['eslint', 'eslint-loader'],
+
+            enforce: 'pre',
+            test: /\.js$/,
+            use: ['eslint-loader']
+        }
+    }
+}

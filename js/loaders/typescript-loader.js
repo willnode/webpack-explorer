@@ -1,5 +1,6 @@
 export default  {
     name: 'ts-loader',
+    slug: 'Typescript',
     options: {
         appendTsSuffixTo: { keys: ['none', '.vue'], value: 'none' },
     },

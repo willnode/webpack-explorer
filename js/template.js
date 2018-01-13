@@ -4,7 +4,7 @@ var jsontojs = /[\"\'](\w+)[\"\']\:/g
 var jsonescape = /([\'\\])/g
 
 
-function parseloader(head, scheme) {
+export function parseloader(head, scheme) {
     if (scheme.head)
         if (Array.isArray(scheme.head))
             for (var hd of scheme.head)

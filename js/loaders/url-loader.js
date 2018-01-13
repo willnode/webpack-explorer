@@ -11,7 +11,7 @@ export default {
     scheme: (op) => {
         var limit = op.limit > 0;
         return {
-            detail: 'return the base64 url of loaded ' + op.files.value
+            detail: 'the base64 url of loaded ' + op.files.value
                 + (limit ? ` if fewer than ${op.limit} KB` : ''),
             warn: limit ? 'will fallback to file-loader if a file exceed that limit' : undefined,
             depends: limit ? ['file-loader', 'url-loader'] : ['url-loader'],

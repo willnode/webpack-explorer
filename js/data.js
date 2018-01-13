@@ -1,7 +1,7 @@
 
 import Data from './data';
 import Registry from './registry';
-import Template from './template';
+import { default as Template, parseloader} from './template';
 
 var beautify = require('js-beautify').js_beautify;
 
@@ -23,6 +23,10 @@ var data = {
     registry: Registry,
     renderz: () => {
         var bs = beautify(Template(data), { indent_size: 2 });
+        return hljs.highlightAuto(bs).value;
+    },
+    loader_renderz: () => {
+        var bs = beautify(parseloader([], data.registry.active), { indent_size: 2 });
         return hljs.highlightAuto(bs).value;
     },
     loader_choose: () => {

@@ -1,15 +1,14 @@
-
-// this babel have 2^3*5 = 40 variants! Keep the 'DRY'
+import { is, allFalsy, ofIndex } from '../toolkit';
 
 var opts_detail = {
     env: ['all browser environments', 'latest 2 versions of major browsers', 'browser versions with more than 5% global usage', 'IE 9 and higher', ''],
     react: 'support React JSX',
     flow: 'support Flow',
-    minify: 'minifies it',
+    minify: 'minified',
 }
 
 var opts = {
-    env: { keys: ['all', 'last 2 versions', '> 5%', 'not ie <= 8', 'off'], value:'all' },
+    env: { keys: ['all', 'last 2 versions', '> 5%', 'not ie <= 8', 'off'], value: 'all' },
     react: false,
     flow: false,
     minify: false,
@@ -17,17 +16,22 @@ var opts = {
 
 export default {
     name: 'babel-loader',
+    slug: 'Babel',
     options: opts,
     scheme: (op = opts) => {
-        var i_off = op.env.value === 'off';
+        var i_on = op.env.value !== 'off';
         return {
-            detail: (() => 'transpile javascript to be ' + [(i_off ? '' : 'compatible with ') + opts_detail.env[op.env.keys.indexOf(op.env.value)]
-                , op.react && opts_detail.react, op.flow && opts_detail.flow
-                , op.minify && opts_detail.minify].filter(Boolean).join(' and '))(),
+            detail: 'compiled javascript that ' +
+                is(i_on, 'compatible with ' + opts_detail.env[ofIndex(op.env)]) +
+                is(op.react, opts_detail.react) +
+                is(op.flow, opts_detail.flow) +
+                is(op.minify, opts_detail.minify),
 
-            depends: ['babel-core', !i_off && 'babel-preset-env', op.react && 'babel-preset-react',
-                op.react && 'react', op.react && 'react-dom', op.flow && 'babel-preset-flow',
-                op.minify && 'babel-preset-minify'].filter(Boolean),
+            depends: ['babel-core']
+                .concat(i_on && ['babel-preset-env'])
+                .concat(op.react && ['babel-preset-react'])
+                .concat(op.flow && ['babel-preset-flow'])
+                .concat(op.minify && 'babel-preset-minify'),
 
             test: op.react ? /\.jsx?$/ : /\.js$/,
             exclude: /node_modules/,
@@ -35,8 +39,9 @@ export default {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    preset: [i_off ? '' : (op.env.value === 'all' ? 'env' : ['env', { targets: { browsers: opts.env.value } }]),
-                    op.react && 'react', op.flow && 'flow', op.minify && 'minify'].filter(Boolean)
+                    preset: [is(i_on, (op.env.value === 'all' ?
+                        'env' : ['env', { targets: { browsers: opts.env.value } }]))
+                        , op.react && 'react', op.flow && 'flow', op.minify && 'minify'].filter(Boolean)
                 }
             }
         }
