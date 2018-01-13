@@ -130,6 +130,6 @@
 </script>
 
 <style lang="scss">
+    @import 'node_modules/highlight.js/styles/vs2015.css';
     @import 'style';
-    @import 'highlighting';
 </style>
