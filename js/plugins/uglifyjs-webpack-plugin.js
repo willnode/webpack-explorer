@@ -19,7 +19,7 @@ export default {
                 if (!(op.beautify | op.parallel | op.sourceMap)) return '';
 
                 return `{${[op.sourceMap && 'sourceMap:true', op.parallel && 'parallel:true', op.beautify &&
-                    (`uglifyOptions: {mangle:false,output:{beautify:true}' }}`)].filter(Boolean).join()}}`
+                    (`uglifyOptions: {mangle:false,output:{beautify:true} }}`)].filter(Boolean).join()}}`
             })()})`
         }
     }

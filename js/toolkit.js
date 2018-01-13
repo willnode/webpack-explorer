@@ -13,4 +13,14 @@ export function allFalsy(opts) {
     return true;
 }
 
-export function ofIndex(option) { return option.keys.indexOf(option.value); }
+export function ofIndex(option) {
+    return option.keys.indexOf(option.value);
+}
+
+export function simplifyIf(really, options) {
+    return really ? options.loader : options;
+}
+
+export function csvToRegexp(csv) {
+    return new RegExp(`\\.(${csv.replace(/ /g, '').replace(/,/g, '|')})$`);
+}

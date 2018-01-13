@@ -1,15 +1,17 @@
+import { is, allFalsy, ofIndex } from '../toolkit';
+
 export default {
     name: 'pug-loader',
-    options: {},
+    options: {
+        jade: false,
+    },
     scheme: (op) => {
         return {
-            detail: '',
-            warn: '',
-            depends: [''],
+            detail: 'template function from .pug' + is(op.jade, ' or .jade'),
+            depends: ['pug-loader'],
 
-            head: undefined,
-            test: /\.css$/,
-            use: ['']
+            test: op.jade ? /\.(pug|jade)$/ : /\.pug$/,
+            use: ['pug-loader']
         }
     }
 }

@@ -17,15 +17,14 @@ export default {
             detail: css.loader_desc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
-            depends: ['css-loader', 'sass-loader', 'node-sass']
-                .concat(op.loader.value !== 'none' && op.loader.value),
+            depends: ['css-loader', 'sass-loader', 'node-sass', op.loader.value],
 
             head: is(extract, css.extract_head('ExtractSass')),
 
-            plugins: is(extract, 'FUNC: ExtractSass'),
-            test: /\.sass$ /,
-            use: extract ? `FUNC: ExtractTextPlugin.extract([${parsestring(cssload)}, ${parsestring(sassload)}])` :
-                [(op.loader.value === 'none' ? 'style-loader' : 'tostring-loader'), cssload, sassload]
+            plugin: is(extract, 'FUNC: ExtractSass'),
+            test: /\.sass$/,
+            use: extract ? `FUNC: ExtractSass.extract([${parsestring(cssload)}, ${parsestring(sassload)}])` :
+                [op.loader.value, cssload, sassload]
         }
     }
 }

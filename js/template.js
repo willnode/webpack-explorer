@@ -1,19 +1,26 @@
 import Data from './data'
 
 var jsontojs = /[\"\'](\w+)[\"\']\:/g
-var jsonescape = /([\'\\])/g
+export var jsonescape = /([\'\\])/g
 
 
-export function parseloader(head, scheme) {
-    if (scheme.head)
+export function parseloader(head, plugin, scheme) {
+    if (scheme.head && head) {
         if (Array.isArray(scheme.head))
             for (var hd of scheme.head)
-                head.concat(scheme.head);
+                head.push(hd);
         else head.push(scheme.head);
+    }
+    if (scheme.plugin && plugin)
+        if (Array.isArray(scheme.plugin))
+            for (var hd of scheme.plugin)
+                plugin.push(parsestring(hd));
+        else plugin.push(parsestring(scheme.plugin));
 
     return `{ ${
         [
             parseparam('test', scheme.test),
+            parseparam('enforce', scheme.enforce),
             parseparam('exclude', scheme.exclude),
             parseparam('include', scheme.include),
             parseparam('use', scheme.use)
@@ -22,7 +29,7 @@ export function parseloader(head, scheme) {
 }
 
 
-function parseplugin(head, scheme) {
+export function parseplugin(head, scheme) {
     if (scheme.head)
         if (Array.isArray(scheme.head))
             for (var hd of scheme.head)
@@ -58,7 +65,7 @@ export function parsestring(str) {
 }
 
 function parseparam(name, value) {
-    if (!value) return ''
+    if (value === undefined) return ''
     else return name + ": " + parsestring(value)
 }
 
@@ -105,26 +112,27 @@ function parseentry(head, entry = []) {
 export default function (data = new Data()) {
 
     var head = [];
+    var plugin = [];
 
     var ret = 'module.exports = {' +
         [
             'entry: ' + parseentry(head, data.entry),
             parseparam('output', {
                 // rack up path individually
-                filename: data.output.filename,
-                path: resolvepath(head, data.output.path, true),
-                publicPath: data.output.publicPath,
-                library: data.output.library,
+                filename: data.output.filename || undefined,
+                path: resolvepath(head, data.output.path, true) || undefined,
+                publicPath: data.output.publicPath || undefined,
+                library: data.output.library || undefined,
             }),
-            (data.loaders && data.loaders.length > 0 && `module: { rules: [ ${
-                data.loaders.map((v) => parseloader(head, v)).join(', ')} ] } `),
-            (data.plugins && data.plugins.length > 0 && `plugins: [ ${
-                data.plugins.map((v) => parseplugin(head, v)).join(', ')} ]`)
+            (data.loaders.length > 0 && `module: { rules: [ ${
+                data.loaders.map((v) => parseloader(head, plugin, v)).join(', ')} ] } `),
+            ((plugin.length > 0 || data.plugins.length > 0) && `plugins: [ ${
+                data.plugins.map((v) => parseplugin(head, v)).concat(plugin).join(', ')} ]`)
         ].filter(Boolean).join(', ')
         + '}';
 
     if (head.length > 0) {
-        head = head.filter((v, i, a) => a.indexOf(v) === i);
+        head = head.filter((v, i, a) => a.indexOf(v) === i).filter(Boolean);
         head.push('', '');
     }
 

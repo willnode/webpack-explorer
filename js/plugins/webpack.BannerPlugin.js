@@ -1,12 +1,16 @@
+import {jsonescape} from '../template'
+
 export default  {
     name: 'webpack.BannerPlugin',
-    options: {},
+    options: {
+        message: ''
+    },
     scheme: (op) => {
         return {
-            detail: '',
+            detail: 'Write comment in bundle head',
             depends: ['webpack'],
             head: "const webpack = require('webpack')",
-            plugin: `FUNC: new webpack.ProgressBar()`
+            plugin: `FUNC: new webpack.ProgressBar('${op.message.replace(jsonescape, '\\$1')}')`
         }
     }
 }

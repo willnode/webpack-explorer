@@ -3,10 +3,10 @@ export default  {
     options: {},
     scheme: (op) => {
         return {
-            detail: '',
+            detail: 'Show progress when bundling is in progress',
             depends: ['webpack'],
             head: "const webpack = require('webpack')",
-            plugin: `FUNC: new webpack.ProgressBar()`
+            plugin: `FUNC: new webpack.ProgressPlugin()`
         }
     }
 }

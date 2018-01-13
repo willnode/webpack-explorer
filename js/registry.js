@@ -35,7 +35,6 @@ export default {
         require('./loaders/vue-loader').default,
     ]),
     plugins: filterIt([
-        require('./plugins/extract-text-webpack-plugin').default,
         require('./plugins/html-webpack-plugin').default,
         require('./plugins/uglifyjs-webpack-plugin').default,
         require('./plugins/webpack.BannerPlugin').default,

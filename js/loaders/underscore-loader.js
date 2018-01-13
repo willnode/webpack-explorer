@@ -1,15 +1,24 @@
+import { is, allFalsy, ofIndex } from '../toolkit';
+
 export default {
     name: 'underscore-loader',
-    options: {},
+    options: {
+        engine: { keys: ['lodash.escape', 'lodash', 'underscore'], value: 'lodash.escape' },
+        minify: true,
+    },
     scheme: (op) => {
         return {
-            detail: '',
-            warn: '',
-            depends: [''],
+            detail: is(op.minify, 'minified ') + 'HTML from .tpl',
+            depends: ['underscore-loader', op.engine],
 
-            head: undefined,
-            test: /\.css$/,
-            use: ['']
+            test: /\.tpl$/,
+            use: [(op.engine !== 'lodash.escape' || !op.minify) ? {
+                loader: 'underscore-loader',
+                options: {
+                    engine: `var _ = { require('${op.engine.value}') };`,
+                    minify: op.minify ? undefined : false,
+                }
+            } : 'underscore-loader']
         }
     }
 }

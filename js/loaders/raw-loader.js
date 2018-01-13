@@ -1,15 +1,17 @@
+import { csvToRegexp } from '../toolkit';
+
 export default {
-    name: 'raw-loader',
-    options: {},
+    name: 'url-loader',
+    options: {
+        files: 'txt'
+    },
     scheme: (op) => {
         return {
-            detail: '',
-            warn: '',
-            depends: [''],
+            detail: 'raw string from selected files',
+            depends: ['raw-loader'],
 
-            head: undefined,
-            test: /\.css$/,
-            use: ['']
+            test: csvToRegexp(op.files),
+            use: ['raw-loader']
         }
     }
 }

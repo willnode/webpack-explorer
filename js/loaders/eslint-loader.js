@@ -14,7 +14,7 @@ export default {
 
             enforce: 'pre',
             test: /\.js$/,
-            use: ['eslint-loader']
+            use: [op.autofix ? { loader: 'eslint-loader', options: { fix: true } } : 'eslint-loader']
         }
     }
 }

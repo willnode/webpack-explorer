@@ -17,15 +17,14 @@ export default {
             detail: css.loader_desc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
-            depends: ['css-loader', 'less-loader']
-                .concat(op.loader.value !== 'none' && op.loader.value),
+            depends: ['css-loader', 'less-loader', op.loader.value],
 
             head: is(extract, css.extract_head('ExtractLess')),
 
-            plugins: is(extract, 'FUNC: ExtractLess'),
-            test: /\.less$ /,
+            plugin: is(extract, 'FUNC: ExtractLess'),
+            test: /\.less$/,
             use: extract ? `FUNC: ExtractTextPlugin.extract([${parsestring(cssload)}, ${parsestring(lessload)}])` :
-                [(op.loader.value === 'none' ? 'style-loader' : 'tostring-loader'), cssload, lessload]
+                [op.loader.value, cssload, lessload]
         }
     }
 }

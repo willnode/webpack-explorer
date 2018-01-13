@@ -3,13 +3,11 @@ export default {
     options: {},
     scheme: (op) => {
         return {
-            detail: '',
-            warn: '',
-            depends: [''],
+            detail: 'converted HTML from markdown',
+            depends: ['markdown-loader', 'html-loader'],
 
-            head: undefined,
-            test: /\.css$/,
-            use: ['']
+            test: /\.(md|markdown)$/,
+            use: ['html-loader', 'markdown-loader']
         }
     }
 }

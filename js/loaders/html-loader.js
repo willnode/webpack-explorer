@@ -1,3 +1,5 @@
+import { is, allFalsy, ofIndex } from '../toolkit';
+
 export default {
     name: 'html-loader',
     options: {
@@ -6,12 +8,19 @@ export default {
     },
     scheme: (op) => {
         return {
-            detail: `minified HTML content while require()-ing external src contents`,
-            warn: '',
+            detail: is(op.minimize, 'minified ') + `HTML contents` +
+                is(op.solveSrc, `while require()-ing external contents`),
+
             depends: ['html-loader'],
 
             test: /\.html$/,
-            use: ['html-loader']
+            use: [(op.minimize | !op.solveSrc) ? {
+                loader: 'html-loader',
+                options: {
+                    minimize: op.minimize || undefined,
+                    attrs: op.solveSrc ? undefined : false
+                }
+            } : 'html-loader']
         }
     }
 }

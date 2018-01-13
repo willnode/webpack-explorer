@@ -21,11 +21,12 @@ export default {
     scheme: (op = opts) => {
         var i_on = op.env.value !== 'off';
         return {
-            detail: 'compiled javascript that ' +
-                is(i_on, 'compatible with ' + opts_detail.env[ofIndex(op.env)]) +
-                is(op.react, opts_detail.react) +
-                is(op.flow, opts_detail.flow) +
-                is(op.minify, opts_detail.minify),
+            detail: 'compiled javascript that ' + [
+                is(i_on, 'compatible with ' + opts_detail.env[ofIndex(op.env)]),
+                is(op.react, opts_detail.react),
+                is(op.flow, opts_detail.flow),
+                is(op.minify, opts_detail.minify)
+            ].filter(Boolean).join(' and '),
 
             depends: ['babel-core']
                 .concat(i_on && ['babel-preset-env'])

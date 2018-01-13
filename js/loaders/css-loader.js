@@ -2,9 +2,9 @@ import { is, allFalsy, ofIndex } from '../toolkit';
 import { parsestring } from '../template'
 
 export const loader_desc = [
-    'none, but execute a script that inject <style> tags to Html DOM',
-    'public path to extracted css content (outside bundle)',
-    'CSS content as tring'
+    'none, but execute a script that inject <style> tags to HTML DOM',
+    'public path to extracted CSS content (outside bundle)',
+    'raw CSS content as string'
 ]
 
 export const extract_head = (name) => [
@@ -30,15 +30,13 @@ export default {
             detail: loader_desc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
-
-            depends: ['css-loader']
-                .concat(op.loader.value !== 'none' && op.loader.value),
+            depends: ['css-loader', op.loader.value],
 
             head: is(extract, extract_head('ExtractCss')),
-            plugins: is(extract, 'FUNC: ExtractCss'),
+            plugin: is(extract, 'FUNC: ExtractCss'),
             test: /\.css$/,
-            use: extract ? `FUNC: ExtractTextPlugin.extract([${parsestring(cssload)}])` :
-                [(op.loader.value === 'none' ? 'style-loader' : 'tostring-loader'), cssload]
+            use: extract ? `FUNC: ExtractCss.extract([${parsestring(cssload)}])` :
+                [op.loader.value, cssload]
         }
     }
 }

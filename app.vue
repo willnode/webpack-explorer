@@ -5,7 +5,7 @@
             <label for='show-all'>
                 <h1 class="hero">Webpack Explorer</h1>
             </label>
-            <span class="hero-name" title="So you don't have to waste time dangling with docs!">Webpack config template and generator</span>
+            <span class="hero-name group" title="So you don't have to waste time dangling with docs!">Webpack config template and generator</span>
             <!---->
             <label for='entry-hide'>
                 <h2>Entry</h2>
@@ -13,9 +13,9 @@
             <input type="radio" class='hide' name='hide' id='entry-hide'>
             <div class="group" id='entry'>
                 <div class="wide" v-for='(e, i) in entry'>
-                    <input v-model='entry[i].key' placeholder="Chunkname"></input>
-                    <input v-model='entry[i].value' placeholder="Entry path"></input>
-                    <button v-if='i === entry.length - 1' class="rem" v-on:click='entry.push({key: "", value: ""})' tabindex="-1">+</button>
+                    <input v-model='entry[i].key' placeholder="Chunkname" title='For multiple entries, chunkname helps identify each entry'></input>
+                    <input v-model='entry[i].value' placeholder="Entry path" title='Relative path to the source'></input>
+                    <button v-if='i === entry.length - 1' class="rem" v-on:click='entry.push({key: "", value: ""})' tabindex="-1" title="Add new entry">+</button>
                     <button v-if='entry.length &gt; 1' class="rem" v-on:click='entry.splice(i, 1)' tabindex="-1">-</button>
                 </div>
             </div>
@@ -25,10 +25,10 @@
             </label>
             <input type="radio" class='hide' name='hide' id='output-hide'>
             <div class="group" id='output'>
-                <input class="wide" v-model='output.filename' placeholder="file name"></input>
-                <input class="wide" v-model='output.path' placeholder="path"></input>
-                <input class="wide" v-model='output.publicPath' placeholder="public path"></input>
-                <input class="wide" v-model='output.library' placeholder="library"></input>
+                <input class="wide" v-model='output.filename' placeholder="file name" title="name of the output. For multiple entries use either [name] [id] [hash] or [chunkhash]"></input>
+                <input class="wide" v-model='output.path' placeholder="path" title="absolute path where bundles will be written (here you can write as the relative path)"></input>
+                <input class="wide" v-model='output.publicPath' placeholder="public path" title="relative path to external assets. In production this must be written as http://. Must end with slash (/)."></input>
+                <!--input class="wide" v-model='output.library' placeholder="library"></input-->
             </div>
             <!--LOADER-->
             <label for='loader-hide'>
@@ -98,6 +98,7 @@
                         <span>
                             <i>{{ registry.candidate.detail }}</i>
                         </span>
+                        <pre v-html='plugin_renderz()' class="hljs"></pre>
                     </div>
                 </div>
                 <div v-for='(l, i) in plugins' class="wide list">
@@ -106,7 +107,6 @@
                     <button v-on:click='plugins.splice(i, 1)' class="rem">-</button>
                 </div>
             </div>
-
         </div>
         <div class="right">
             <h1 class="hero-2">Output</h1>

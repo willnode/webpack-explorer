@@ -1,7 +1,7 @@
 
 import Data from './data';
 import Registry from './registry';
-import { default as Template, parseloader} from './template';
+import { default as Template, parseloader, parseplugin} from './template';
 
 var beautify = require('js-beautify').js_beautify;
 
@@ -22,11 +22,16 @@ var data = {
     },
     registry: Registry,
     renderz: () => {
+        // renderz because vue will buggy if we name this 'render'
         var bs = beautify(Template(data), { indent_size: 2 });
         return hljs.highlightAuto(bs).value;
     },
     loader_renderz: () => {
-        var bs = beautify(parseloader([], data.registry.active), { indent_size: 2 });
+        var bs = beautify(parseloader(undefined, undefined, data.registry.active), { indent_size: 2 });
+        return hljs.highlightAuto(bs).value;
+    },
+    plugin_renderz: () => {
+        var bs = beautify(parseplugin(undefined, data.registry.candidate), { indent_size: 2 });
         return hljs.highlightAuto(bs).value;
     },
     loader_choose: () => {
@@ -38,7 +43,7 @@ var data = {
         data.registry.candidate = sel.scheme(sel.options);
     },
     depedencies: () => {
-        var dev = ['webpack'];
+        var dev = ['webpack', 'webpack-dev-server'];
 
         for (var l of data.loaders)
             if (l.depends)
