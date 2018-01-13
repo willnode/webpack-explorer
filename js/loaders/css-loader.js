@@ -2,7 +2,7 @@ import { is, allFalsy, ofIndex } from '../toolkit';
 import { parsestring } from '../template'
 
 export const loader_desc = [
-    'none, but execute a script that inject <style> tags to HTML DOM',
+    'none, but executes a javascript that inject <style> tags to HTML DOM',
     'public path to extracted CSS content (outside bundle)',
     'raw CSS content as string'
 ]

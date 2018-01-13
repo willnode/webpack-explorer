@@ -1,7 +1,7 @@
 import { csvToRegexp } from '../toolkit';
 
 export default {
-    name: 'url-loader',
+    name: 'raw-loader',
     options: {
         files: 'txt'
     },

@@ -28,7 +28,7 @@ export default {
                 is(op.minify, opts_detail.minify)
             ].filter(Boolean).join(' and '),
 
-            depends: ['babel-core']
+            depends: ['babel-core', 'babel-loader']
                 .concat(i_on && ['babel-preset-env'])
                 .concat(op.react && ['babel-preset-react'])
                 .concat(op.flow && ['babel-preset-flow'])
