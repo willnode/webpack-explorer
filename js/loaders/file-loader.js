@@ -11,7 +11,7 @@ export default {
     scheme: (op) => {
         var customname = op.name.value !== '[hash].[ext]';
         return {
-            detail: 'return the public path of loaded files'+
+            detail: 'the public path of selected files'+
                 is(customname, ' with custom format ', op.name.value) +
                 is(!op.emitFile, ' without actually emitting files to public path'),
 

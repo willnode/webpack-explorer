@@ -1,10 +1,9 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ProgressBar = require('progress-bar-webpack-plugin');
 const webpack = require('webpack')
 
 module.exports = {
   entry: './js/main.js',
   output: {
+    // bundle.js as root path for development. it's git ignored.
     filename: 'bundle.js'
   },
   module: {
@@ -21,8 +20,6 @@ module.exports = {
   },
   plugins: [
    new webpack.ProgressPlugin()
-    //new UglifyJsPlugin({ parallel: true }),
-   // new ProgressBar()
   ],
   devtool: "cheap-source-map" /*"cheap-module-eval-source-map" <- webpack goes buggy*/,
   watch: true,

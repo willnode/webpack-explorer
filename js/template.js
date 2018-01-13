@@ -30,10 +30,10 @@ export function parseloader(head, plugin, scheme) {
 
 
 export function parseplugin(head, scheme) {
-    if (scheme.head)
+    if (scheme.head && head)
         if (Array.isArray(scheme.head))
             for (var hd of scheme.head)
-                head.concat(scheme.head);
+                head.push(hd);
         else head.push(scheme.head);
 
     return [
