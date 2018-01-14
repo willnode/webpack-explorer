@@ -23,6 +23,9 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin()
   ],
+  resolve: {
+    extensions: ['.js', '.vue']
+  },
   devtool: "cheap-source-map" /* "cheap-module-eval-source-map" <- webpack buggy here? */,
   watch: true, /* not using webpack-dev-server. sorry */
   watchOptions: {
