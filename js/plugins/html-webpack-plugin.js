@@ -9,7 +9,7 @@ export default {
     scheme: (op) => {
         return {
             detail: `generate HTML with bundled scripts and styles to ${op.filename || 'index.html'}`
-                + (op.template ? (' that based on template at ' + op.template) : ''),
+                + (op.template ? (' which based on template at ' + op.template) : ''),
 
             depends: ['html-webpack-plugin'],
 

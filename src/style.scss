@@ -77,6 +77,11 @@ button.wide,
     margin: 0px;
 }
 
+input[placeholder='Chunkname'] {
+    flex-grow: 0;
+    width: 150px;
+}
+
 .rem {
     margin-left: 5px;
 }
