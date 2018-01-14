@@ -4,6 +4,7 @@ const css = require('./css-loader');
 
 export default {
     name: 'stylus-loader',
+    git: 'shama/stylus-loader',
     slug: 'Stylus',
     options: {
         loader: { keys: css.default.options.loader.keys, value: 'style-loader' },

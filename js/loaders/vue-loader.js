@@ -1,5 +1,6 @@
 export default  {
     name: 'vue-loader',
+    git: 'vuejs/vue-loader',
     options: {
         sass: false,
     },

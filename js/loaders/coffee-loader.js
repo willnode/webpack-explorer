@@ -2,7 +2,8 @@ import { is, allFalsy } from '../toolkit';
 
 export default {
     name: 'coffee-loader',
-    slug: 'Coffee',
+    git: 'webpack-contrib/coffee-loader',
+    slug: 'CoffeeScript',
     options: {
         literate: false,
         sourceMap: false,

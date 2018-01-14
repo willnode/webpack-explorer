@@ -1,11 +1,13 @@
 export default {
     name: 'json-loader',
+    git: 'webpack-contrib/json-loader',
     slug: 'JSON',
     options: {},
     scheme: (op) => {
         return {
             detail: 'parsed object from JSON',
-            warn: `JSON is already work out of box.`,
+            warn: `JSON is already <a title="no need to setup this loader explicitly!" ` +
+                `href="https://github.com/webpack-contrib/json-loader#install">works by default</a>.`,
             depends: ['json-loader'],
 
             test: /\.json$/,

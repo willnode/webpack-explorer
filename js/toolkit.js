@@ -24,3 +24,9 @@ export function simplifyIf(really, options) {
 export function csvToRegexp(csv) {
     return new RegExp(`\\.(${csv.replace(/ /g, '').replace(/,/g, '|')})$`);
 }
+
+var jsonescape = /['\\]/g
+
+export function stringify(str) {
+    return `'${str.replace(jsonescape, '\\$1')}'`
+}

@@ -1,5 +1,6 @@
 export default {
     name: 'markdown-loader',
+    git: 'peerigon/markdown-loader',
     options: {},
     scheme: (op) => {
         return {

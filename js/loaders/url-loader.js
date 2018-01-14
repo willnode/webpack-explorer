@@ -2,6 +2,7 @@ import { csvToRegexp } from '../toolkit';
 
 export default {
     name: 'url-loader',
+    git: 'webpack-contrib/url-loader',
     options: {
         files: 'jpe?g, svg',
         limit: 0,

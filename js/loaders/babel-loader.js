@@ -16,6 +16,7 @@ var opts = {
 
 export default {
     name: 'babel-loader',
+    git: 'babel/babel-loader',
     slug: 'Babel',
     options: opts,
     scheme: (op = opts) => {

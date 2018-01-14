@@ -4,6 +4,7 @@ const css = require('./css-loader');
 
 export default {
     name: 'less-loader',
+    git: 'webpack-contrib/less-loader',
     slug: 'Less',
     options: {
         loader: { keys: css.default.options.loader.keys, value: 'style-loader' },

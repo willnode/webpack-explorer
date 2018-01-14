@@ -2,6 +2,7 @@ import { is, allFalsy, ofIndex } from '../toolkit';
 
 export default {
     name: 'html-loader',
+    git: 'webpack-contrib/html-loader',
     options: {
         minimize: false,
         solveSrc: true,

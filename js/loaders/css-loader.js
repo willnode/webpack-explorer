@@ -14,6 +14,7 @@ export const extract_head = (name) => [
 
 export default {
     name: 'css-loader',
+    git: 'webpack-contrib/css-loader',
     slug: 'CSS',
     options: {
         loader: { keys: ['style-loader', 'extract-text-webpack-plugin', 'to-string-loader'], value: 'style-loader' },

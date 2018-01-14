@@ -1,5 +1,6 @@
 export default {
     name: 'cson-loader',
+    git: 'awnist/cson-loader',
     slug: 'CSON',
     options: {},
     scheme: (op) => {

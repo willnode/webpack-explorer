@@ -2,6 +2,8 @@ import { is, allFalsy, ofIndex } from '../toolkit';
 
 export default {
     name: 'pug-loader',
+    git: 'pugjs/pug-loader',
+    slug: 'Pug/Jade',
     options: {
         jade: false,
     },

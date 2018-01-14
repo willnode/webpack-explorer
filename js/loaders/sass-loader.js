@@ -4,15 +4,23 @@ const css = require('./css-loader');
 
 export default {
     name: 'sass-loader',
+    git: 'webpack-contrib/sass-loader',
     slug: 'Sass/SCSS',
     options: {
         loader: { keys: css.default.options.loader.keys, value: 'style-loader' },
         sourceMap: false,
+        compressed: false,
     },
     scheme: (op) => {
         var extract = op.loader.value === 'extract-text-webpack-plugin';
         var cssload = op.sourceMap ? { loader: 'css-loader', options: { sourceMap: true } } : 'css-loader';
-        var sassload =  op.sourceMap ? { loader: 'sass-loader', options: { sourceMap: true } } : 'sass-loader';
+        var sassload = (op.sourceMap | op.compressed) ? {
+            loader: 'sass-loader', options: {
+                sourceMap: op.sourceMap || undefined,
+                outputStyle: op.compressed ? 'compressed' : undefined
+            }
+        } : 'sass-loader';
+
         return {
             detail: css.loader_desc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),

@@ -4,12 +4,24 @@ $scheme: #07c;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     max-width: 1200px;
     margin: auto;
     align-content: center;
     background-color: whitesmoke;
+}
+
+button {
+    font-size: large;
+    font-weight: bold;
+}
+
+body, input, select, button {
+    font-family: 'Lato', 'Segoe UI', Tahoma, sans-serif;
+}
+
+pre {
+    font-family: 'Consolas', monospace
 }
 
 .hero-name {
@@ -106,7 +118,7 @@ label {
 }
 
 h2 {
-    margin: 6px 0px 0px 0px;
+    margin: 8px 0px 0px 0px;
     font-weight: bold;
     display: block;
     font-size: 20px;

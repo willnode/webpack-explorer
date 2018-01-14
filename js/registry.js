@@ -22,7 +22,6 @@ export default {
         require('./loaders/less-loader').default,
         require('./loaders/markdown-loader').default,
         require('./loaders/mocha-loader').default,
-        require('./loaders/modernizr-loader').default,
         require('./loaders/postcss-loader').default,
         require('./loaders/posthtml-loader').default,
         require('./loaders/pug-loader').default,

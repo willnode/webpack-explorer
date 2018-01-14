@@ -3,6 +3,7 @@ var names = ['[hash].[ext]', '[path][name].[ext]'];
 
 export default {
     name: 'file-loader',
+    git: 'webpack-contrib/file-loader',
     options: {
         files: 'png, jpe?g, bmp, gif',
         name: { keys: names, value: '[hash].[ext]' },

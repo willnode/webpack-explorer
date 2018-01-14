@@ -2,6 +2,7 @@ import { is, allFalsy } from '../toolkit';
 
 export default {
     name: 'eslint-loader',
+    git: 'MoOx/eslint-loader',
     options: {
         autofix: false,
     },

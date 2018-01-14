@@ -2,6 +2,7 @@ import { is, allFalsy, ofIndex } from '../toolkit';
 
 export default {
     name: 'underscore-loader',
+    git: 'tomek-f/underscore-loader',
     options: {
         engine: { keys: ['lodash.escape', 'lodash', 'underscore'], value: 'lodash.escape' },
         minify: true,

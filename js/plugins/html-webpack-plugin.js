@@ -1,3 +1,5 @@
+import { stringify} from '../toolkit'
+
 export default {
     name: 'html-webpack-plugin',
     options: {
@@ -15,7 +17,7 @@ export default {
             plugin: `FUNC: new HtmlPlugin(${(() => {
                 if (!op.template && (!op.filename || op.filename === 'index.html')) return '';
 
-                return `{${[op.template && 'template:' + op.template, op.filename && 'filename:' + op.filename
+                return `{${[op.template && 'template:' + stringify(op.template), op.filename && 'filename:' + stringify(op.filename)
                 ].filter(Boolean).join()}}`
             })()})`
         }
