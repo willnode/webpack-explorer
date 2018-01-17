@@ -3,7 +3,7 @@ export default {
 	git: 'awnist/cson-loader',
 	slug: 'CSON',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'parsed object from CSON',
 			warn: undefined,

@@ -1,4 +1,4 @@
-import {is, allFalsy, ofIndex, csvToRegexp} from '../toolkit';
+import {is, csvToRegexp} from '../toolkit';
 
 const names = ['[hash].[ext]', '[path][name].[ext]'];
 

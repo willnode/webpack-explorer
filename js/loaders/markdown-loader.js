@@ -2,7 +2,7 @@ export default {
 	name: 'markdown-loader',
 	git: 'peerigon/markdown-loader',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'converted HTML from markdown',
 			depends: ['markdown-loader', 'html-loader'],

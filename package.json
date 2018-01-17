@@ -11,6 +11,12 @@
     "test": "xo",
     "test-autofix": "xo --fix"
   },
+  "xo": {
+    "envs": ["browser", "commonjs"],
+    "rules": {
+      "object-curly-spacing": "off"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",

@@ -1,7 +1,7 @@
 export default {
 	name: 'webpack.HotModuleReplacementPlugin',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'Enable webpack hot-reloading',
 			depends: ['webpack'],

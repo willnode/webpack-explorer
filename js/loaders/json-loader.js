@@ -3,7 +3,7 @@ export default {
 	git: 'webpack-contrib/json-loader',
 	slug: 'JSON',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'parsed object from JSON',
 			warn: `JSON is already <a title="no need to setup this loader explicitly!" ` +

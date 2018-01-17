@@ -1,10 +1,10 @@
-import {print} from 'util';
-
 const filterIt = arr =>
-    arr.filter((x, i, a) => {
+    arr.filter(x => {
 	if (!x.scheme(x.options).detail) {
-		console.warn('ERR-INCOMPLETE:' + x.name); return false;
-	} return true;
+		console.warn('ERR-INCOMPLETE:' + x.name);
+		return false;
+	}
+	return true;
 });
 
 export default {
@@ -36,12 +36,12 @@ export default {
 	plugins: filterIt([
 		require('./plugins/html-webpack-plugin').default,
 		require('./plugins/uglifyjs-webpack-plugin').default,
-		require('./plugins/webpack.BannerPlugin').default,
-		require('./plugins/webpack.DefinePlugin').default,
-		require('./plugins/webpack.HotModuleReplacementPlugin').default,
-		require('./plugins/webpack.IgnorePlugin').default,
-		require('./plugins/webpack.ProgressPlugin').default,
-		require('./plugins/webpack.ProvidePlugin').default
+		require('./plugins/webpack.banner-plugin').default,
+		require('./plugins/webpack.define-plugin').default,
+		require('./plugins/webpack.hot-module-replacement-plugin').default,
+		require('./plugins/webpack.ignore-plugin').default,
+		require('./plugins/webpack.progress-plugin').default,
+		require('./plugins/webpack.provide-plugin').default
 	]),
 
     // Dummy variables used during runtime

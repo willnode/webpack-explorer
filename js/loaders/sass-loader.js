@@ -1,4 +1,4 @@
-import {is, allFalsy, ofIndex} from '../toolkit';
+import {is, ofIndex} from '../toolkit';
 import {parsestring} from '../template';
 
 const css = require('./css-loader');
@@ -23,12 +23,12 @@ export default {
 		} : 'sass-loader';
 
 		return {
-			detail: css.loader_desc[ofIndex(op.loader)] +
+			detail: css.loaderDesc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
 			depends: ['css-loader', 'sass-loader', 'node-sass', op.loader.value],
 
-			head: is(extract, css.extract_head('ExtractSass')),
+			head: is(extract, css.extractHead('ExtractSass')),
 
 			plugin: is(extract, 'FUNC: ExtractSass'),
 			test: /\.sass$/,

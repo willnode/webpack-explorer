@@ -1,13 +1,13 @@
-import {is, allFalsy, ofIndex} from '../toolkit';
+import {is, ofIndex} from '../toolkit';
 import {parsestring} from '../template';
 
-export const loader_desc = [
+export const loaderDesc = [
 	'none, but executes a javascript that inject <style> tags to HTML DOM',
 	'public path to extracted CSS content (outside bundle)',
 	'raw CSS content as string'
 ];
 
-export const extract_head = name => [
+export const extractHead = name => [
 	'const ExtractTextPlugin = require(\'extract-text-webpack-plugin\')',
 	`const ${name} = new ExtractTextPlugin('[name][contenthash].css')`
 ];
@@ -28,12 +28,12 @@ export default {
 		} : 'css-loader';
 
 		return {
-			detail: loader_desc[ofIndex(op.loader)] +
+			detail: loaderDesc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
 			depends: ['css-loader', op.loader.value],
 
-			head: is(extract, extract_head('ExtractCss')),
+			head: is(extract, extractHead('ExtractCss')),
 			plugin: is(extract, 'FUNC: ExtractCss'),
 			test: /\.css$/,
 			use: extract ? `FUNC: ExtractCss.extract([${parsestring(cssload)}])` :

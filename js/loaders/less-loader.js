@@ -1,4 +1,4 @@
-import {is, allFalsy, ofIndex} from '../toolkit';
+import {is, ofIndex} from '../toolkit';
 import {parsestring} from '../template';
 
 const css = require('./css-loader');
@@ -16,12 +16,12 @@ export default {
 		const cssload = op.sourceMap ? {loader: 'css-loader', options: {sourceMap: true}} : 'css-loader';
 		const lessload = op.sourceMap ? {loader: 'less-loader', options: {sourceMap: true}} : 'less-loader';
 		return {
-			detail: css.loader_desc[ofIndex(op.loader)] +
+			detail: css.loaderDesc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
 			depends: ['css-loader', 'less-loader', op.loader.value],
 
-			head: is(extract, css.extract_head('ExtractLess')),
+			head: is(extract, css.extractHead('ExtractLess')),
 
 			plugin: is(extract, 'FUNC: ExtractLess'),
 			test: /\.less$/,

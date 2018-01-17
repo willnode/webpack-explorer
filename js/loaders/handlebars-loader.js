@@ -3,7 +3,7 @@ export default {
 	git: 'pcardune/handlebars-loader',
 	slug: 'Handlebars',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'resolved handlebars template',
 			depends: ['handlebars-loader'],

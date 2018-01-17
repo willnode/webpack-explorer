@@ -1,4 +1,4 @@
-import {is, allFalsy} from '../toolkit';
+import {is} from '../toolkit';
 
 export default {
 	name: 'eslint-loader',

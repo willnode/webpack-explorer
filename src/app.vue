@@ -38,7 +38,7 @@
             <div class="group" id='loader'>
                 <div id='loader-add'>
                     <div class="wide">
-                        <select v-model='registry.selected' @change='loader_choose()'>
+                        <select v-model='registry.selected' @change='chooseLoader()'>
                             <option v-for='l in registry.loaders' :value='l'>{{ l.name }}</option>
                         </select>
                         <button class="rem" :disabled='!registry.active' v-on:click='loaders.push(registry.active); registry.selected=registry.active=""'>+</button>
@@ -46,12 +46,12 @@
                     <div class="setup-wide" v-if='registry.selected'>
                         <div v-for='(v, k) in registry.selected.options'>
                             <span>{{k}}</span>
-                            <select v-if='v.keys' v-model='registry.selected.options[k].value' @change='loader_choose()'>
+                            <select v-if='v.keys' v-model='registry.selected.options[k].value' @change='chooseLoader()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
-                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.selected.options[k]' @change='plugin_choose()'>
-                            <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @change='loader_choose()'>
-                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.selected.options[k]' @change='loader_choose()'>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.selected.options[k]' @change='choosePlugin()'>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @change='chooseLoader()'>
+                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.selected.options[k]' @change='chooseLoader()'>
                         </div>
                     </div>
                     <div v-if='registry.active' class="info">
@@ -64,7 +64,7 @@
                             <span>NOTE:</span>
                             <span v-html='registry.active.warn'></span>
                         </div>
-                        <pre v-html='loader_renderz()' class="hljs"></pre>
+                        <pre v-html='renderLoader()' class="hljs"></pre>
                     </div>
                 </div>
                 <div v-for='(l, i) in loaders' class="wide list">
@@ -81,7 +81,7 @@
             <div class="group" id='plugin'>
                 <div id='plugin-add'>
                     <div class="wide">
-                        <select v-model='registry.picked' @change='plugin_choose()'>
+                        <select v-model='registry.picked' @change='choosePlugin()'>
                             <option v-for='l in registry.plugins' :value='l'>{{ l.name }}</option>
                         </select>
                         <button class="rem" :disabled='!registry.candidate' v-on:click='plugins.push(registry.candidate); registry.picked=registry.candidate=""'>+</button>
@@ -89,12 +89,12 @@
                     <div class="setup-wide" v-if='registry.picked'>
                         <div v-for='(v, k) in registry.picked.options'>
                             <span>{{k}}</span>
-                            <select v-if='v.keys' v-model='registry.picked.options[k].value' @change='plugin_choose()'>
+                            <select v-if='v.keys' v-model='registry.picked.options[k].value' @change='choosePlugin()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
-                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.picked.options[k]' @change='plugin_choose()'>
-                            <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @change='plugin_choose()'>
-                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.picked.options[k]' @change='plugin_choose()'>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.picked.options[k]' @change='choosePlugin()'>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @change='choosePlugin()'>
+                            <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.picked.options[k]' @change='choosePlugin()'>
                         </div>
                     </div>
                     <div v-if='registry.candidate' class="info">
@@ -102,7 +102,7 @@
                         <span>
                             <i>{{ registry.candidate.detail }}</i>
                         </span>
-                        <pre v-html='plugin_renderz()' class="hljs"></pre>
+                        <pre v-html='renderPlugin()' class="hljs"></pre>
                     </div>
                 </div>
                 <div v-for='(l, i) in plugins' class="wide list">

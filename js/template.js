@@ -1,12 +1,11 @@
 import Data from './data';
 
-const jsontojs = /[\"\'](\w+)[\"\']\:/g;
-export var jsonescape = /([\'\\])/g;
+export const jsonescape = /(['\\])/g;
 
 export function parseloader(head, plugin, scheme) {
 	if (scheme.head && head) {
 		if (Array.isArray(scheme.head)) {
-			for (var hd of scheme.head) {
+			for (const hd of scheme.head) {
 				head.push(hd);
 			}
 		}	else {
@@ -15,7 +14,7 @@ export function parseloader(head, plugin, scheme) {
 	}
 	if (scheme.plugin && plugin) {
 		if (Array.isArray(scheme.plugin)) {
-			for (var hd of scheme.plugin) {
+			for (const hd of scheme.plugin) {
 				plugin.push(parsestring(hd));
 			}
 		}	else {
@@ -68,7 +67,9 @@ export function parsestring(str) {
 
 	const s = [];
 	for (const prop in str) {
-		s.push(parseparam(prop, str[prop]));
+		if (str[prop] !== undefined) {
+			s.push(parseparam(prop, str[prop]));
+		}
 	}
 	return `{ ${s.filter(Boolean).join(', ')} }`;
 }
@@ -86,7 +87,9 @@ function resolvepath(head = [], path = '', absolute) {
 	} else if (typeof path === 'object') {
 		path = Object.assign({}, path);
 		for (const i in path) {
-			path[i] = resolvepath(head, path[i], absolute);
+			if (path[i] !== undefined) {
+				path[i] = resolvepath(head, path[i], absolute);
+			}
 		}
 		return path;
 	}

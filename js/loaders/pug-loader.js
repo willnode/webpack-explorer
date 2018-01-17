@@ -1,4 +1,4 @@
-import {is, allFalsy, ofIndex} from '../toolkit';
+import {is} from '../toolkit';
 
 export default {
 	name: 'pug-loader',

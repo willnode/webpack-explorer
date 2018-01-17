@@ -1,7 +1,7 @@
 export default {
-	name: 'webpack.DefinePlugin',
+	name: 'webpack.ProvidePlugin',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: '',
 			depends: ['webpack'],

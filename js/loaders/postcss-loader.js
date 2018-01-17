@@ -1,4 +1,4 @@
-import {is, allFalsy, ofIndex} from '../toolkit';
+import {is, ofIndex} from '../toolkit';
 import {parsestring} from '../template';
 
 const css = require('./css-loader');
@@ -15,12 +15,12 @@ export default {
 		const cssload = op.sourceMap ? {loader: 'css-loader', options: {sourceMap: true}} : 'css-loader';
 		const postload = op.sourceMap ? {loader: 'postcss-loader', options: {sourceMap: true}} : 'postcss-loader';
 		return {
-			detail: css.loader_desc[ofIndex(op.loader)] +
+			detail: css.loaderDesc[ofIndex(op.loader)] +
                 is(op.sourceMap, ' with the source map'),
 
 			depends: ['css-loader', 'postcss-loader', 'postcss', op.loader.value],
 
-			head: is(extract, css.extract_head('ExtractPostCss')),
+			head: is(extract, css.extractHead('ExtractPostCss')),
 
 			plugin: is(extract, 'FUNC: ExtractPostCss'),
 			test: /\.css$/,

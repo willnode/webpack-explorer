@@ -1,7 +1,7 @@
 export default {
 	name: 'webpack.ProgressPlugin',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'Show progress when bundling is in progress',
 			depends: ['webpack'],

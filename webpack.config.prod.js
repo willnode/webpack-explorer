@@ -1,4 +1,5 @@
 // Config for production 'yarn run prod'
+const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
@@ -7,7 +8,7 @@ module.exports = {
 	output: {
 		filename: 'bundle.js',
     // Weirdly this is okay.
-		path: __dirname + '/docs'
+		path: path.resolve(__dirname, 'docs')
 	},
 	module: {
 		rules: [{

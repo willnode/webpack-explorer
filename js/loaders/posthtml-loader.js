@@ -3,7 +3,7 @@ export default {
 	git: 'posthtml/posthtml-loader',
 	slug: 'PostHTML',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'post processed HTML file using PostHTML',
 			depends: ['posthtml-loader', 'posthtml-plugin'],

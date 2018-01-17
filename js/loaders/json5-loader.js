@@ -3,7 +3,7 @@ export default {
 	git: 'webpack-contrib/json5-loader',
 	slug: 'JSON5',
 	options: {},
-	scheme: op => {
+	scheme: () => {
 		return {
 			detail: 'parsed object from JSON5',
 			depends: ['json5-loader'],
