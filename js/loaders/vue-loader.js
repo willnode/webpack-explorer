@@ -7,7 +7,7 @@ export default  {
     scheme: (op) => {
         return {
             detail: 'parsed .vue template.' + (op.sass ? 'Use Sass/SCSS in styles using <style lang="scss">' : ''),
-            depends: ['vue-loader', 'vue-template-compiler', 'css-loader']
+            depends: ['vue-loader', 'vue-template-compiler', 'css-loader', 'vue']
                 .concat(op.sass ? ['sass-loader', 'node-sass', 'vue-style-loader'] : []),
 
             test: /\.vue$/,
