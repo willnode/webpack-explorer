@@ -1,6 +1,5 @@
 
 import {js_beautify as beautify} from 'js-beautify';
-import Registry from './registry';
 import {default as template, parseloader, parseplugin} from './template';
 
 // https://github.com/sindresorhus/xo/issues/75
@@ -21,7 +20,7 @@ const data = {
 		publicPath: '', // Out html asset directory
 		library: '' // Out as module name
 	},
-	registry: Registry,
+	registry: require('./registry'),
 	renderz: () => {
         // Renderz because vue will buggy if we name this 'render'
 		const bs = beautify(template(data), beautifyOpts);
