@@ -5,6 +5,7 @@ import {is, ofIndex} from '../toolkit';
 export default {
 	name: 'typescript-loader',
 	slug: 'Typescript',
+	ctg: 'JS',
 	options: {
 		loader: {keys: ['ts-loader', 'awesome-typescript-loader'], value: 'ts-loader'},
 		babel: {keys: ['none', 'env', 'env + react'], value: 'none'},

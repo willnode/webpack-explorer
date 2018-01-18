@@ -4,6 +4,7 @@ export default {
 	name: 'pug-loader',
 	git: 'pugjs/pug-loader',
 	slug: 'Pug/Jade',
+	ctg: 'HTML',
 	options: {
 		jade: false
 	},

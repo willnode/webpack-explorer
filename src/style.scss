@@ -11,9 +11,23 @@ body {
     background-color: whitesmoke;
 }
 
-button {
+button, .help {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    padding: 2px 7px;
     font-size: large;
     font-weight: bold;
+    background-color: #dde;
+    border: 0px;
+}
+
+button:hover, .help:hover {
+    background-color: #fff;
+}
+
+button:active, .help:active {
+    background-color: #07c;
 }
 
 body, input, select, button {

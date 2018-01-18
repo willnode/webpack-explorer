@@ -4,7 +4,8 @@ const webpack = require('webpack');
 module.exports = {
 	entry: './js/main.js',
 	output: {
-    // Bundle.js as root path for development. sorry it's git ignored.
+		// This does nothing if we are using webpack-dev-server as
+		// dev-server save the bundle in memory. (which is great)
 		filename: 'bundle.js'
 	},
 	module: {
@@ -13,7 +14,7 @@ module.exports = {
 			use: [{
 				loader: 'vue-loader', options: {
 					loaders: {
-            /* I put scss inside app.vue */
+						/* I put scss inside app.vue */
 						scss: ['vue-style-loader', 'css-loader', 'sass-loader']
 					}
 				}
@@ -26,10 +27,5 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.vue']
 	},
-	devtool: 'cheap-source-map' /* "cheap-module-eval-source-map" <- webpack buggy here? */,
-	watch: true, /* Not using webpack-dev-server. sorry */
-	watchOptions: {
-		poll: 1000,
-		ignored: /node_modules/
-	}
+	devtool: 'cheap-source-map' /* "cheap-module-eval-source-map" <- webpack buggy here? */
 };

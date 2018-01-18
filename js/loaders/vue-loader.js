@@ -1,6 +1,8 @@
 export default {
 	name: 'vue-loader',
 	git: 'vuejs/vue-loader',
+	slug: 'Vue',
+	ctg: 'JS',
 	options: {
 		sass: false
 	},

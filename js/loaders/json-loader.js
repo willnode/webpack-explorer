@@ -2,6 +2,7 @@ export default {
 	name: 'json-loader',
 	git: 'webpack-contrib/json-loader',
 	slug: 'JSON',
+	ctg: 'Asset',
 	options: {},
 	scheme: () => {
 		return {

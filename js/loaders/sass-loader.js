@@ -7,6 +7,7 @@ export default {
 	name: 'sass-loader',
 	git: 'webpack-contrib/sass-loader',
 	slug: 'Sass/SCSS',
+	ctg: 'CSS',
 	options: {
 		loader: {keys: css.default.options.loader.keys, value: 'style-loader'},
 		sourceMap: false,

@@ -7,6 +7,7 @@ export default {
 	name: 'less-loader',
 	git: 'webpack-contrib/less-loader',
 	slug: 'Less',
+	ctg: 'CSS',
 	options: {
 		loader: {keys: css.default.options.loader.keys, value: 'style-loader'},
 		sourceMap: false

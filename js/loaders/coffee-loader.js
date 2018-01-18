@@ -4,6 +4,7 @@ export default {
 	name: 'coffee-loader',
 	git: 'webpack-contrib/coffee-loader',
 	slug: 'CoffeeScript',
+	ctg: 'JS',
 	options: {
 		literate: false,
 		sourceMap: false,

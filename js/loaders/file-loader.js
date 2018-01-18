@@ -1,10 +1,12 @@
 import {is, csvToRegexp} from '../toolkit';
 
-const names = ['[hash].[ext]', '[path][name].[ext]'];
+const names = ['[hash].[ext]', '[path][name].[ext]', '[name].[ext]'];
 
 export default {
 	name: 'file-loader',
 	git: 'webpack-contrib/file-loader',
+	slug: 'File Loader',
+	ctg: 'Asset',
 	options: {
 		files: 'png, jpe?g, bmp, gif',
 		name: {keys: names, value: '[hash].[ext]'},
@@ -15,7 +17,7 @@ export default {
 		return {
 			detail: 'the public path of selected files' +
                 is(customname, ' with custom format ', op.name.value) +
-                is(!op.emitFile, ' without actually emitting files to public path'),
+                is(!op.emitFile, ' without actually emitting files to output path'),
 
 			depends: ['file-loader'],
 

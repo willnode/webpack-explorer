@@ -7,6 +7,7 @@ export default {
 	name: 'stylus-loader',
 	git: 'shama/stylus-loader',
 	slug: 'Stylus',
+	ctg: 'CSS',
 	options: {
 		loader: {keys: css.default.options.loader.keys, value: 'style-loader'},
 		sourceMap: false

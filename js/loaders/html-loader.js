@@ -3,6 +3,8 @@ import {is} from '../toolkit';
 export default {
 	name: 'html-loader',
 	git: 'webpack-contrib/html-loader',
+	slug: 'HTML Loader',
+	ctg: 'HTML',
 	options: {
 		minimize: false,
 		solveSrc: true
@@ -10,7 +12,7 @@ export default {
 	scheme: op => {
 		return {
 			detail: is(op.minimize, 'minified ') + `HTML contents` +
-                is(op.solveSrc, `while require()-ing external contents`),
+                is(op.solveSrc, ` while processing extenal contents using loaders`),
 
 			depends: ['html-loader'],
 

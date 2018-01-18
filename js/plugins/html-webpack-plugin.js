@@ -1,4 +1,4 @@
-import {stringify} from '../toolkit';
+import { stringify } from '../toolkit';
 
 export default {
 	name: 'html-webpack-plugin',
@@ -8,8 +8,8 @@ export default {
 	},
 	scheme: op => {
 		return {
-			detail: `generate HTML with bundled scripts and styles to ${op.filename || 'index.html'}` +
-                (op.template ? (' which based on template at ' + op.template) : ''),
+			detail: `generate HTML with scripts and styles, to ${op.filename || 'index.html'}` +
+				(op.template ? (' and be based on template at ' + op.template) : ''),
 
 			depends: ['html-webpack-plugin'],
 
@@ -19,7 +19,8 @@ export default {
 					return '';
 				}
 
-				return `{${[op.template && 'template:' + stringify(op.template), op.filename && 'filename:' + stringify(op.filename)
+				return `{${[op.template && 'template:' + stringify(op.template),
+					op.filename !== 'index.html' && 'filename:' + stringify(op.filename)
 				].filter(Boolean).join()}}`;
 			})()})`
 		};

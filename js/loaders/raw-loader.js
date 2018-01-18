@@ -3,7 +3,8 @@ import {csvToRegexp} from '../toolkit';
 export default {
 	name: 'raw-loader',
 	git: 'webpack-contrib/raw-loader',
-	slug: 'raw-loader',
+	slug: 'Raw Loader',
+	ctg: 'Asset',
 	options: {
 		files: 'txt'
 	},

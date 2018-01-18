@@ -39,8 +39,11 @@
                 <div id='loader-add'>
                     <div class="wide">
                         <select v-model='registry.selected' @change='chooseLoader()'>
-                            <option v-for='l in registry.loaders' :value='l'>{{ l.name }}</option>
+                            <optgroup :label="g.title" v-for='g in registry.loaderGroups'>
+                                    <option v-for='l in g.loaders' :value='l'>{{ l.slug }}</option>
+                            </optgroup>
                         </select>
+                        <a class="rem help" v-if='registry.active' :href='"https://github.com/"+registry.selected.git+"#readme"' target="_blank">?</a>
                         <button class="rem" :disabled='!registry.active' v-on:click='loaders.push(registry.active); registry.selected=registry.active=""'>+</button>
                     </div>
                     <div class="setup-wide" v-if='registry.selected'>
@@ -49,8 +52,8 @@
                             <select v-if='v.keys' v-model='registry.selected.options[k].value' @change='chooseLoader()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
-                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.selected.options[k]' @change='choosePlugin()'>
-                            <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @change='chooseLoader()'>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.selected.options[k]' @input='chooseLoader()'>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.selected.options[k]' @input='chooseLoader()'>
                             <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.selected.options[k]' @change='chooseLoader()'>
                         </div>
                     </div>
@@ -92,8 +95,8 @@
                             <select v-if='v.keys' v-model='registry.picked.options[k].value' @change='choosePlugin()'>
                                 <option v-for='k in v.keys'>{{k}}</option>
                             </select>
-                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.picked.options[k]' @change='choosePlugin()'>
-                            <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @change='choosePlugin()'>
+                            <input v-if='typeof v === "number"' type="number" v-model.number='registry.picked.options[k]' @input='choosePlugin()'>
+                            <input v-if='typeof v === "string"' type="text" v-model='registry.picked.options[k]' @input='choosePlugin()'>
                             <input v-if='typeof v === "boolean"' type="checkbox" v-model='registry.picked.options[k]' @change='choosePlugin()'>
                         </div>
                     </div>
@@ -126,20 +129,21 @@
 </template>
 
 <script>
-    import Data from '../js/data';
-    import Cat from './octocat.vue';
+    import data from '../js/data';
+    import cat from './octocat.vue';
     export default {
         components: {
-            'the-cat':Cat,
+            'the-cat': cat,
         },
         data: function () {
-            return Data;
+            return data;
         }
     }
 </script>
 
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+    @import '../node_modules/balloon-css/balloon.min.css';
     @import '../node_modules/highlight.js/styles/vs2015.css';
     @import 'style';
 </style>

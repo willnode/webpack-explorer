@@ -6,7 +6,8 @@ const css = require('./css-loader');
 export default {
 	name: 'postcss-loader',
 	git: 'postcss/postcss-loader',
-	slug: 'postcss',
+	slug: 'PostCSS',
+	ctg: 'CSS',
 	options: {
 		loader: {keys: css.default.options.loader.keys, value: 'style-loader'}
 	},

@@ -2,6 +2,7 @@ export default {
 	name: 'cson-loader',
 	git: 'awnist/cson-loader',
 	slug: 'CSON',
+	ctg: 'Asset',
 	options: {},
 	scheme: () => {
 		return {

@@ -18,6 +18,7 @@ export default {
 	name: 'babel-loader',
 	git: 'babel/babel-loader',
 	slug: 'Babel',
+	ctg: 'JS',
 	options: opts,
 	scheme: (op = opts) => {
 		const useEnv = op.env.value !== 'off';

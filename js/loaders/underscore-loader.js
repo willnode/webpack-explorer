@@ -3,6 +3,8 @@ import {is} from '../toolkit';
 export default {
 	name: 'underscore-loader',
 	git: 'tomek-f/underscore-loader',
+	ctg: 'HTML',
+	slug: 'Underscore',
 	options: {
 		engine: {keys: ['lodash.escape', 'lodash', 'underscore'], value: 'lodash.escape'},
 		minify: true

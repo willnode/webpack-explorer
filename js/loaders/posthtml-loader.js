@@ -2,6 +2,7 @@ export default {
 	name: 'posthtml-loader',
 	git: 'posthtml/posthtml-loader',
 	slug: 'PostHTML',
+	ctg: 'HTML',
 	options: {},
 	scheme: () => {
 		return {
