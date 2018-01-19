@@ -15,8 +15,7 @@
     "node": ">=8"
   },
   "ava": {
-    "require": "babel-register",
-    "babel": "inherit"
+    "require": "babel-register"
   },
   "babel": {
     "presets": [

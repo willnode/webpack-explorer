@@ -22,6 +22,15 @@ button, .help {
     border: 0px;
 }
 
+.help {
+    background-color: whitesmoke;
+    font-size: 14px;
+    margin: auto;
+    font-weight: normal;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+}
+
 button:hover, .help:hover {
     background-color: #fff;
 }
@@ -134,13 +143,15 @@ input[placeholder='Chunkname'] {
 
 label {
     cursor: pointer;
+    display: flex;
 }
+
 
 h2 {
     margin: 8px 0px 0px 0px;
     font-weight: bold;
-    display: block;
     font-size: 20px;
+    flex-grow: 1;
 }
 
 pre {

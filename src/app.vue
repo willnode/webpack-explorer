@@ -3,12 +3,13 @@
         <div class="left">
             <input type="radio" class='hide' name='hide' id='show-all' checked>
             <label for='show-all'>
-                <h1 class="hero">Webpack Explorer</h1>
+                <h1 class="hero">Webpack Explorer </h1>
             </label>
             <span class="hero-name group" title="So you don't have to waste time dangling with docs!">Webpack config template and generator</span>
             <!--ENTRY-->
             <label for='entry-hide'>
                 <h2>Entry</h2>
+                <a class="rem help" href='https:/webpack.js.org/concept/entry' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='entry-hide'>
             <div class="group" id='entry'>
@@ -22,6 +23,7 @@
             <!--OUTPUT-->
             <label for='output-hide'>
                 <h2>Output</h2>
+                <a class="rem help" href='https:/webpack.js.org/concept/output' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='output-hide'>
             <div class="group" id='output'>
@@ -33,6 +35,7 @@
             <!--LOADER-->
             <label for='loader-hide'>
                 <h2>Loader</h2>
+                <a class="rem help" href='https:/webpack.js.org/concept/loaders' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='loader-hide'>
             <div class="group" id='loader'>
@@ -40,7 +43,7 @@
                     <div class="wide">
                         <select v-model='registry.selected' @change='chooseLoader()'>
                             <optgroup :label="g.title" v-for='g in registry.loaderGroups'>
-                                    <option v-for='l in g.loaders' :value='l'>{{ l.slug }}</option>
+                                <option v-for='l in g.loaders' :value='l'>{{ l.slug }}</option>
                             </optgroup>
                         </select>
                         <a class="rem help" v-if='registry.active' :href='"https://github.com/"+registry.selected.git+"#readme"' target="_blank">?</a>
@@ -79,6 +82,7 @@
             <!--PLUGIN-->
             <label for='plugin-hide'>
                 <h2>Plugin</h2>
+                <a class="rem help" href='https:/webpack.js.org/concept/plugins' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='plugin-hide'>
             <div class="group" id='plugin'>
