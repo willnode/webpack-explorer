@@ -8,7 +8,7 @@ At first look it may look very simple, then try to add some loaders and see if i
 
 ## Preamble
 
-Building Javascript with webpack is strictly optional. If you happen to happily use [Codepen](https://codepen.io) and somehow your code get too large and burden and wishing to split it, Webpack might be right tool. Otherwise stick with the easy one 😉
+Building Javascript with webpack is optional. If you happen to happily use [Codepen](https://codepen.io) and somehow your code get too large and burden and wishing to split it, Webpack might be right tool. Otherwise stick with the easy one 😉
 
 #### Alpha Stage
 
@@ -82,13 +82,11 @@ That's it! now run `npm run dev` and see your localhost:8080. See the `Hello, Wo
 
 Don't forget to try `require()` to other javascript or files that you're set with your loaders. If you want to go big, don't forget to set your source to `src/` and output to `dist/` (or your own convention, its your project anyway!).
 
-> Cool Fact: Webpack have built-in watch mode (which we already running in `webpack-dev-server` already), and [HMR mode](https://webpack.js.org/concepts/hot-module-replacement/). Try to get running with these features as well!
-
 ---
 
 ## Caveat
 
-Webpack is of course, very powerful. Some features (and loaders/plugins) can't get into this project because it's technically difficult to do (but easy for human). Some other yet important concept (e.g. development vs production mode) is not handled in this project (but you *can* see how this project [handles it](package.json)). Use your human creativity to unlock webpack full potential!
+Webpack is of course, very powerful. Some features (and loaders/plugins) can't get into this demo because it's technically difficult to do (but easy for human). Some other yet important concept (e.g. development vs production mode) is not handled in this project (but you *can* see how this project [handles it](package.json)). Use human creativity to unlock webpack full potential!
 
 One more thing is that, if your project targeting a framework, have a look to its boilerplate. Projects like [create-react-app](https://github.com/facebookincubator/create-react-app) for React and [vue-cli](https://github.com/vuejs/vue-cli) for Vue.js is an excellent boilerplate tool and have preconfigured webpack config out of the box, often packed with many features included. Have a look if you don't do it yet.
 
