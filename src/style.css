@@ -1,4 +1,3 @@
-$scheme: #07c;
 * {
     box-sizing: border-box;
 }
@@ -11,7 +10,8 @@ body {
     background-color: whitesmoke;
 }
 
-button, .help {
+button,
+.help {
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -31,20 +31,25 @@ button, .help {
     border: 1px solid lightgray;
 }
 
-button:hover, .help:hover {
+button:hover,
+.help:hover {
     background-color: #fff;
 }
 
-button:active, .help:active {
+button:active,
+.help:active {
     background-color: #07c;
 }
 
-body, input, select, button {
+body,
+input,
+select,
+button {
     font-family: 'Lato', 'Segoe UI', Tahoma, sans-serif;
 }
 
 pre {
-    font-family: 'Consolas', monospace
+    font-family: "Consolas", monospace;
 }
 
 .hero-name {
@@ -111,14 +116,14 @@ input[placeholder='Chunkname'] {
 
 #loader-add,
 #plugin-add {
-    background-color: lighten($scheme, 50%);
+    background-color: #cceaff;
     padding: 5px;
     margin: 5px 0px;
     animation: height 0.3s ease-in;
 }
 
 .npm-link>a {
-    color: lighten($scheme, 70%);
+    color: white;
     white-space: nowrap;
     text-decoration-line: none;
 }
@@ -146,7 +151,6 @@ label {
     display: flex;
 }
 
-
 h2 {
     margin: 8px 0px 0px 0px;
     font-weight: bold;
@@ -166,7 +170,7 @@ pre {
 
 .info {
     font-size: 14px;
-    background-color: lighten($scheme, 70%);
+    background-color: white;
     color: #222;
     margin-top: 5px;
     padding: 5px;
@@ -178,5 +182,5 @@ pre {
 }
 
 .hljs {
-    background: darken(#07c, 32%);
+    background: #001829;
 }

@@ -145,8 +145,8 @@
     }
 </script>
 
-<style lang="scss">
+<style>
     @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
     @import '../node_modules/highlight.js/styles/vs2015.css';
-    @import 'style';
+    @import 'style.css';
 </style>
