@@ -147,7 +147,6 @@
 
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
-    @import '../node_modules/balloon-css/balloon.min.css';
     @import '../node_modules/highlight.js/styles/vs2015.css';
     @import 'style';
 </style>

@@ -7,8 +7,7 @@ module.exports = {
 	entry: './js/main.js',
 	output: {
 		filename: 'bundle.js',
-    // Weirdly this is okay.
-		path: path.resolve(__dirname, 'docs')
+		path: path.resolve(__dirname, 'dist')
 	},
 	module: {
 		rules: [{
@@ -25,8 +24,9 @@ module.exports = {
 			use: [{
 				loader: 'vue-loader', options: {
 					loaders: {
-						scss: ['vue-style-loader', 'css-loader', {
-							loader: 'sass-loader', options: {outputStyle: 'compressed'
+						css: ['vue-style-loader', {
+							loader: 'css-loader', options: {
+								minimize: true
 							}
 						}]
 					}
@@ -41,8 +41,6 @@ module.exports = {
 				NODE_ENV: '"production"'
 			}
 		}),
-    /* Can't resist without this */
-		new webpack.ProgressPlugin(),
     /* It's not production if not minified */
 		new UglifyJsPlugin()
 	]

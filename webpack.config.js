@@ -14,14 +14,14 @@ module.exports = {
 			use: [{
 				loader: 'vue-loader', options: {
 					loaders: {
-						/* I put scss inside app.vue */
-						scss: ['vue-style-loader', 'css-loader', 'sass-loader']
+						css: ['vue-style-loader', 'css-loader']
 					}
 				}
 			}]
 		}]
 	},
 	plugins: [
+		/* Can't resist without this */
 		new webpack.ProgressPlugin()
 	],
 	resolve: {
