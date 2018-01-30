@@ -43,7 +43,7 @@ export default {
 				loader: 'babel-loader',
 				options: {
 					preset: [is(useEnv, (op.env.value === 'all' ?
-                        'env' : ['env', {targets: {browsers: opts.env.value}}])),
+                        'env' : ['env', {targets: {browsers: [opts.env.value]}}])),
 						op.react && 'react', op.flow && 'flow', op.minify && 'minify'].filter(Boolean)
 				}
 			}

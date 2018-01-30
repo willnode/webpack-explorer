@@ -118,8 +118,8 @@ function parseentry(entry = []) {
 }
 
 function resolveWithPath(head, path) {
-	head.push(`const path = requires('path')`);
-	return `FUNC: path.resolve(__dirname, '${path}')`;
+	head.push(`const path = require('path')`);
+	return `FUNC: path.resolve(__dirname, '${path.substr(2)}')`;
 }
 
 export default function (data = new Data()) {

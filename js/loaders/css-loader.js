@@ -8,7 +8,7 @@ export const loaderDesc = [
 ];
 
 export const extractHead = name => [
-	'const ExtractTextPlugin = require(\'extract-text-webpack-plugin\')',
+	`const ExtractTextPlugin = require('extract-text-webpack-plugin')`,
 	`const ${name} = new ExtractTextPlugin('[name][contenthash].css')`
 ];
 

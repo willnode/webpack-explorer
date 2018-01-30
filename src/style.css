@@ -5,7 +5,7 @@
 body {
     font-size: 16px;
     max-width: 1200px;
-    margin: auto;
+    margin: 8px 16px;
     align-content: center;
     background-color: whitesmoke;
 }
@@ -29,6 +29,10 @@ button,
     font-weight: normal;
     border-radius: 3px;
     border: 1px solid lightgray;
+}
+
+.right .help, h2 + .help {
+    margin-top: 8px;
 }
 
 button:hover,
@@ -152,7 +156,7 @@ label {
 }
 
 h2 {
-    margin: 8px 0px 0px 0px;
+    margin: 8px 0px 0px 10px;
     font-weight: bold;
     font-size: 20px;
     flex-grow: 1;

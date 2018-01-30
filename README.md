@@ -1,5 +1,7 @@
 # Webpack Explorer
 
+![screenshot here](dist/screenshot.png)
+
 At first I was scared with how difficult to setup a project with webpack in it, so much that I'd think to just move on and forget about it. But soon after this project is started, things change.
 
 This is my first project running with webpack. **[Open it right in your browser now](https://wilnode.github.com/webpack-explorer)**.
@@ -18,8 +20,6 @@ Yes, this is a fresh new hot spaghetti project and a lot ingredients are missing
 
 First figure what frameworks and tools that your project will use. Babel? Jsx? Sass? Typescript? Vue? I got you covered. Just pick what necessary.
 
-![screenshot here](docs/screenshot.png)
-
 #### Get a new project
 
 On the right side, you'll be served with two things: the `webpack.config.js` and its `npm depedencies`.
@@ -30,7 +30,7 @@ First on new empty folder, open a terminal and run:
 npm init
 ```
 
-Answer few questions, then when it's done. Install those `npm depedencies`:
+Answer few questions, then install those `npm depedencies`:
 
 ```
 npm install webpack webpack-dev-server ... ... ... ... --save-dev
@@ -71,12 +71,12 @@ After that, **wait** until it's done. Then add these scripts in your `package.js
 {
     "scripts": {
         "dev": "webpack-dev-server",
-        "build": "webpack",
+        "build": "webpack"
     }
 }
 ```
 
-That's it! now run `npm run dev` and see your localhost:8080. See the `Hello, World!`? Congratulation 🎉
+That's it! now run `npm run dev` and open `localhost:8080`. See the `Hello, World!`? Congratulation 🎉
 
 #### Next Level
 

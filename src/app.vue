@@ -9,7 +9,7 @@
             <!--ENTRY-->
             <label for='entry-hide'>
                 <h2>Entry</h2>
-                <a class="rem help" href='https:/webpack.js.org/concept/entry' target="_blank">i</a>
+                <a class="rem help" href='https://webpack.js.org/concepts/entry-points' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='entry-hide'>
             <div class="group" id='entry'>
@@ -23,7 +23,7 @@
             <!--OUTPUT-->
             <label for='output-hide'>
                 <h2>Output</h2>
-                <a class="rem help" href='https:/webpack.js.org/concept/output' target="_blank">i</a>
+                <a class="rem help" href='https://webpack.js.org/concepts/output' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='output-hide'>
             <div class="group" id='output'>
@@ -35,7 +35,7 @@
             <!--LOADER-->
             <label for='loader-hide'>
                 <h2>Loader</h2>
-                <a class="rem help" href='https:/webpack.js.org/concept/loaders' target="_blank">i</a>
+                <a class="rem help" href='https://webpack.js.org/concepts/loaders' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='loader-hide'>
             <div class="group" id='loader'>
@@ -82,7 +82,7 @@
             <!--PLUGIN-->
             <label for='plugin-hide'>
                 <h2>Plugin</h2>
-                <a class="rem help" href='https:/webpack.js.org/concept/plugins' target="_blank">i</a>
+                <a class="rem help" href='https://webpack.js.org/concepts/plugins' target="_blank">i</a>
             </label>
             <input type="radio" class='hide' name='hide' id='plugin-hide'>
             <div class="group" id='plugin'>
@@ -120,11 +120,16 @@
             </div>
         </div>
         <div class="right">
-            <h1 class="hero-2">Output</h1>
-            <h2>webpack.config.js</h2>
-            <pre id='generated' v-html='renderz()' class="hljs"></pre>
-            <h2 style="cursor: pointer" v-on:click='registry.yarn=!registry.yarn'> {{ registry.yarn ? 'yarn' : 'npm' }} depedencies</h2>
-            <pre id='generated' class="hljs wrap">{{ registry.yarn ? 'yarn add' : 'npm install' }} <span class="hljs-attr npm-link" v-html='depedencies()'></span><span style="white-space:nowrap"> {{ registry.yarn ? '--dev' : '--save-dev' }}</span></pre>
+            <div style="display:flex">
+                <button class="rem help" data-clipboard-target="#generated-config" title="Copy to clipboard">📋</button>
+                <h2>webpack.config.js</h2>
+            </div>
+            <pre id='generated-config' v-html='renderz()' class="hljs"></pre>
+            <div style="display:flex">
+                    <button class="rem help" data-clipboard-target="#generated-npm" title="Copy to clipboard">📋</button>
+                    <h2 style="cursor: pointer" v-on:click='registry.yarn=!registry.yarn'> {{ registry.yarn ? 'yarn' : 'npm' }} depedencies</h2>
+            </div>
+            <pre id='generated-npm' class="hljs wrap">{{ registry.yarn ? 'yarn add' : 'npm install' }} <span class="hljs-attr npm-link" v-html='depedencies()'></span><span style="white-space:nowrap"> {{ registry.yarn ? '--dev' : '--save-dev' }}</span></pre>
             <!--h2>case example</h2>
             <pre class="hljs">TODO</pre-->
         </div>

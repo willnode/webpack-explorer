@@ -3,7 +3,7 @@ import {is} from '../toolkit';
 export default {
 	name: 'pug-loader',
 	git: 'pugjs/pug-loader',
-	slug: 'Pug/Jade',
+	slug: 'Pug',
 	ctg: 'HTML',
 	options: {
 		jade: false

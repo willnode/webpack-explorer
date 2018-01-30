@@ -1,3 +1,4 @@
+import Clipboard from 'clipboard';
 import Vue from 'vue';
 import App from '../src/app.vue';
 
@@ -8,3 +9,5 @@ const vue = new Vue({
 
 // For those who curious
 window.vue = vue.$children[0];
+
+new Clipboard('button');
